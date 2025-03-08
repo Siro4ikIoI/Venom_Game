@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: SpaseSirStudios
   productName: Run away from venom
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -866,8 +866,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Run away from venom
-  metroPackageVersion: 
+  metroPackageName: Runawayfromvenom
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -875,7 +875,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Run away from venom
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Run away from venom
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
