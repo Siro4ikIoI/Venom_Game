@@ -10,12 +10,13 @@ public class LevelGen : MonoBehaviour
 
     void Start()
     {
-        GameObject mainRoom = Instantiate(mapRoom[0]);
+        int randomMainRoom = Random.Range(0, mapRoom.Length);
+        GameObject mainRoom = Instantiate(mapRoom[randomMainRoom]);
         mainRoom.transform.position = new Vector3(0, 0, 0);
-        GenRoom(mainRoom.transform, 1);
+        GenRoom(mainRoom.transform);
     }
 
-    public void GenRoom(Transform parentRoom, int roomIndex)
+    public void GenRoom(Transform parentRoom)
     {
         if (currentRoomCount >= maxRooms)
             return;
@@ -26,7 +27,8 @@ public class LevelGen : MonoBehaviour
         {
             if (connector != null)
             {
-                GameObject room = Instantiate(mapRoom[roomIndex]);
+                int randomRoom = Random.Range(1, mapRoom.Length);
+                GameObject room = Instantiate(mapRoom[randomRoom]);
                 currentRoomCount++;
 
                 connector.SetParent(null);
@@ -34,7 +36,7 @@ public class LevelGen : MonoBehaviour
 
                 room.transform.position = newRoomPosition;
 
-                GenRoom(room.transform, roomIndex);
+                GenRoom(room.transform);
             }
         }
     }
