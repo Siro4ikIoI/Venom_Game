@@ -1,81 +1,218 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class RoomData
+{
+    public GameObject roomPrefab;
+    public bool topExit, bottomExit, leftExit, rightExit;
+}
+
+public class RoomInstance : MonoBehaviour
+{
+    public RoomData roomData; // Связь с данными комнаты
+}
+
 public class LevelGen : MonoBehaviour
 {
-    public GameObject[] mapRoom;
-    public int maxRooms = 10;
-    private int currentRoomCount = 1;
+    [Header("Основные комнаты")]
+    public List<RoomData> roomTemplates;
+    public GameObject startRoomPrefab;
+    public GameObject endRoomPrefab;
+
+    [Header("Тупики (по 1 выходу)")]
+    public List<RoomData> deadEndRooms;
+
+    [Header("Настройки генерации")]
+    public int maxRooms = 20;
+    public Vector2Int gridSize = new Vector2Int(10, 10);
+    public Vector2Int startPos = Vector2Int.zero;
+
+    private Dictionary<Vector2Int, GameObject> placedRooms = new Dictionary<Vector2Int, GameObject>();
+    private List<Vector2Int> roomPositions = new List<Vector2Int>();
+
+    private List<Vector2Int> directions = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
     void Start()
     {
-        int randomMainRoom = Random.Range(0, mapRoom.Length);
-        GameObject mainRoom = Instantiate(mapRoom[randomMainRoom]);
-        mainRoom.transform.position = new Vector3(0, 0, 0);
-        GenRoom(mainRoom.transform);
+        GenerateLevel();
     }
 
-    public void GenRoom(Transform parentRoom)
+    void GenerateLevel()
     {
-        if (currentRoomCount >= maxRooms)
-            return;
+        Queue<Vector2Int> frontier = new Queue<Vector2Int>();
 
-        List<Transform> conectors = GetConnectors(parentRoom);
+        // --- 1. Стартовая комната ---
+        var startRoom = Instantiate(startRoomPrefab, GetWorldPosition(startPos), Quaternion.identity);
+        placedRooms[startPos] = startRoom;
+        roomPositions.Add(startPos);
 
-        foreach (Transform connector in conectors)
+        // --- 2. Первая обязательная комната рядом со стартом ---
+        Vector2Int firstRoomPos = startPos + Vector2Int.right;
+        placedRooms[firstRoomPos] = null; // Резервируем
+        frontier.Enqueue(firstRoomPos);
+        roomPositions.Add(firstRoomPos);
+
+        // --- 3. Генерация остальных комнат ---
+        while (frontier.Count > 0 && placedRooms.Count < maxRooms)
         {
-            if (connector != null)
+            Vector2Int currentPos = frontier.Dequeue();
+
+            List<Vector2Int> neighbors = GetOccupiedNeighbors(currentPos);
+            RoomData roomData = PickRoomForNeighbors(neighbors, currentPos);
+            if (roomData == null) continue;
+
+            GameObject roomGO = Instantiate(roomData.roomPrefab, GetWorldPosition(currentPos), Quaternion.identity);
+            roomGO.AddComponent<RoomInstance>().roomData = roomData;
+            placedRooms[currentPos] = roomGO;
+
+            // Добавляем новые фронтиры
+            foreach (Vector2Int dir in directions)
             {
-                int randomRoom = Random.Range(1, mapRoom.Length);
-                GameObject room = Instantiate(mapRoom[randomRoom]);
-                currentRoomCount++;
+                Vector2Int nextPos = currentPos + dir;
+                if (!placedRooms.ContainsKey(nextPos) && IsInBounds(nextPos) && Random.value > 0.3f)
+                {
+                    frontier.Enqueue(nextPos);
+                    placedRooms[nextPos] = null; // Резерв
+                    roomPositions.Add(nextPos);
+                }
+            }
+        }
 
-                connector.SetParent(null);
-                Vector3 newRoomPosition = GetRoomPosition(connector, room);
+        // --- 4. Поиск финальной комнаты ---
+        Vector2Int endPos = FindFarEndRoomPosition();
+        if (endPos != Vector2Int.zero)
+        {
+            Vector2Int neighborDir = GetSingleNeighborDirection(endPos);
+            Quaternion rot = GetRotationToDirection(-neighborDir);
+            placedRooms[endPos] = Instantiate(endRoomPrefab, GetWorldPosition(endPos), rot);
+            Debug.Log($"Финальная комната на {endPos}");
+        }
 
-                room.transform.position = newRoomPosition;
+        // --- 5. Заполняем пустоты тупиками ---
+        FillEmptySpacesWithDeadEnds();
 
-                GenRoom(room.transform);
+        Debug.Log($"Итоговое количество комнат: {placedRooms.Count}");
+    }
+
+    // --- Вспомогательные функции ---
+
+    Vector3 GetWorldPosition(Vector2Int pos) => new Vector3(pos.x * gridSize.x, 0, pos.y * gridSize.y);
+
+    bool IsInBounds(Vector2Int pos) => pos.x >= -gridSize.x / 2 && pos.x <= gridSize.x / 2 && pos.y >= -gridSize.y / 2 && pos.y <= gridSize.y / 2;
+
+    List<Vector2Int> GetOccupiedNeighbors(Vector2Int pos)
+    {
+        List<Vector2Int> neighbors = new List<Vector2Int>();
+        foreach (var dir in directions)
+            if (placedRooms.ContainsKey(pos + dir)) neighbors.Add(dir);
+        return neighbors;
+    }
+
+    RoomData PickRoomForNeighbors(List<Vector2Int> neighbors, Vector2Int currentPos)
+    {
+        List<RoomData> candidates = roomTemplates.FindAll(room =>
+            (!neighbors.Contains(Vector2Int.up) || room.bottomExit) &&
+            (!neighbors.Contains(Vector2Int.down) || room.topExit) &&
+            (!neighbors.Contains(Vector2Int.left) || room.rightExit) &&
+            (!neighbors.Contains(Vector2Int.right) || room.leftExit)
+        );
+
+        if (candidates.Count > 0)
+            return candidates[Random.Range(0, candidates.Count)];
+
+        Debug.LogWarning($"Нет подходящей комнаты для {currentPos}");
+        return null;
+    }
+
+    Vector2Int FindFarEndRoomPosition()
+    {
+        Vector2Int farthest = Vector2Int.zero;
+        float maxDist = 0;
+
+        foreach (Vector2Int pos in placedRooms.Keys)
+        {
+            if (placedRooms[pos] != null) continue;
+            if (GetOccupiedNeighbors(pos).Count == 1)
+            {
+                float dist = Vector2Int.Distance(startPos, pos);
+                if (dist > maxDist)
+                {
+                    maxDist = dist;
+                    farthest = pos;
+                }
+            }
+        }
+        return farthest;
+    }
+
+    Vector2Int GetSingleNeighborDirection(Vector2Int pos)
+    {
+        foreach (Vector2Int dir in directions)
+            if (placedRooms.ContainsKey(pos + dir)) return dir;
+        return Vector2Int.zero;
+    }
+
+    Quaternion GetRotationToDirection(Vector2Int dir)
+    {
+        if (dir == Vector2Int.up) return Quaternion.Euler(0, 0, 0);
+        if (dir == Vector2Int.right) return Quaternion.Euler(0, 90, 0);
+        if (dir == Vector2Int.down) return Quaternion.Euler(0, 180, 0);
+        if (dir == Vector2Int.left) return Quaternion.Euler(0, 270, 0);
+        return Quaternion.identity;
+    }
+
+    // --- Тупики ---
+
+    void FillEmptySpacesWithDeadEnds()
+    {
+        foreach (var roomPos in roomPositions)
+        {
+            GameObject roomObj = placedRooms[roomPos];
+            if (roomObj == null) continue;
+
+            RoomData data = roomObj.GetComponent<RoomInstance>().roomData;
+            if (data == null) continue;
+
+            foreach (Vector2Int dir in directions)
+            {
+                Vector2Int neighborPos = roomPos + dir;
+                if (placedRooms.ContainsKey(neighborPos)) continue;
+
+                bool hasExit = false;
+                if (dir == Vector2Int.up && data.topExit) hasExit = true;
+                if (dir == Vector2Int.down && data.bottomExit) hasExit = true;
+                if (dir == Vector2Int.left && data.leftExit) hasExit = true;
+                if (dir == Vector2Int.right && data.rightExit) hasExit = true;
+
+                if (hasExit && IsInBounds(neighborPos))
+                {
+                    PlaceDeadEnd(neighborPos, -dir);
+                    roomPositions.Add(neighborPos);
+                }
             }
         }
     }
 
-    private List<Transform> GetConnectors(Transform room)
+    void PlaceDeadEnd(Vector2Int position, Vector2Int toDirection)
     {
-        List<Transform> connectors = new List<Transform>();
-        foreach (Transform child in room)
-        {
-            if (child.name == "Conecter") connectors.Add(child);
-        }
-        return connectors;
-    }
+        RoomData deadEnd = deadEndRooms.Find(room =>
+            (toDirection == Vector2Int.up && room.bottomExit) ||
+            (toDirection == Vector2Int.down && room.topExit) ||
+            (toDirection == Vector2Int.left && room.rightExit) ||
+            (toDirection == Vector2Int.right && room.leftExit)
+        );
 
-    private Vector3 GetRoomPosition(Transform connector, GameObject room)
-    {
-        Vector3 position = Vector3.zero;
-
-        if (connector.position.x > 0)
+        if (deadEnd != null)
         {
-            room.transform.Rotate(0, -90, 0);
-            position = new Vector3(connector.position.x * -2, 0, connector.position.z);
+            GameObject room = Instantiate(deadEnd.roomPrefab, GetWorldPosition(position), Quaternion.identity);
+            room.AddComponent<RoomInstance>().roomData = deadEnd;
+            placedRooms[position] = room;
+            Debug.Log($"Добавлен тупик в {position}");
         }
-        else if (connector.position.x < 0)
+        else
         {
-            room.transform.Rotate(0, 90, 0);
-            position = new Vector3(connector.position.x * -2, 0, -connector.position.z);
+            Debug.LogWarning($"Нет тупика для {position} в направлении {toDirection}");
         }
-        else if (connector.position.z > 0)
-        {
-            room.transform.Rotate(0, 0, 0);
-            position = new Vector3(0, 0, connector.position.z * 2);
-        }
-        else if (connector.position.z < 0)
-        {
-            room.transform.Rotate(0, 180, 0);
-            position = new Vector3(0, 0, connector.position.z * 2);
-        }
-
-        return position;
     }
 }
