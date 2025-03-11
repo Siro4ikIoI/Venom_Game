@@ -257,7 +257,22 @@ MonoBehaviour:
     bottomExit: 0
     leftExit: 0
     rightExit: 0
-  maxRooms: 10
+  - roomPrefab: {fileID: 725047333427593176, guid: f343f2c66ffa9484baf78df3dd9467b8, type: 3}
+    topExit: 0
+    bottomExit: 1
+    leftExit: 0
+    rightExit: 0
+  - roomPrefab: {fileID: 725047333427593176, guid: f343f2c66ffa9484baf78df3dd9467b8, type: 3}
+    topExit: 0
+    bottomExit: 0
+    leftExit: 1
+    rightExit: 0
+  - roomPrefab: {fileID: 725047333427593176, guid: f343f2c66ffa9484baf78df3dd9467b8, type: 3}
+    topExit: 0
+    bottomExit: 0
+    leftExit: 0
+    rightExit: 1
+  maxRooms: 4
   gridSize: {x: 55, y: 55}
   startPos: {x: 0, y: 0}
 --- !u!4 &1485060375

@@ -48,7 +48,7 @@ public class LevelGen : MonoBehaviour
         roomPositions.Add(startPos);
 
         // --- 2. Первая обязательная комната рядом со стартом ---
-        Vector2Int firstRoomPos = startPos + Vector2Int.right;
+        Vector2Int firstRoomPos = startPos + Vector2Int.down;
         placedRooms[firstRoomPos] = null; // Резервируем
         frontier.Enqueue(firstRoomPos);
         roomPositions.Add(firstRoomPos);
@@ -166,13 +166,17 @@ public class LevelGen : MonoBehaviour
 
     void FillEmptySpacesWithDeadEnds()
     {
+        List<Vector2Int> newPositions = new List<Vector2Int>(); // Временный список
+
         foreach (var roomPos in roomPositions)
         {
             GameObject roomObj = placedRooms[roomPos];
             if (roomObj == null) continue;
 
-            RoomData data = roomObj.GetComponent<RoomInstance>().roomData;
-            if (data == null) continue;
+            RoomInstance roomInstance = roomObj.GetComponent<RoomInstance>();
+            if (roomInstance == null || roomInstance.roomData == null) continue;
+
+            RoomData data = roomInstance.roomData;
 
             foreach (Vector2Int dir in directions)
             {
@@ -187,11 +191,16 @@ public class LevelGen : MonoBehaviour
 
                 if (hasExit && IsInBounds(neighborPos))
                 {
-                    PlaceDeadEnd(neighborPos, -dir);
-                    roomPositions.Add(neighborPos);
+                    
                 }
+
+                PlaceDeadEnd(neighborPos, -dir);
+                newPositions.Add(neighborPos); // Добавляем во временный список
             }
         }
+
+        // Добавляем новые позиции после завершения цикла
+        roomPositions.AddRange(newPositions);
     }
 
     void PlaceDeadEnd(Vector2Int position, Vector2Int toDirection)
