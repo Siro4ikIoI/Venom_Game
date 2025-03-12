@@ -86,7 +86,7 @@ public class LevelGen : MonoBehaviour
                 if (!placedRooms.ContainsKey(nextPos) && IsInBounds(nextPos) && Random.value > 0.3f)
                 {
                     frontier.Enqueue(nextPos);
-                    placedRooms[nextPos] = null; // Резерв
+                    placedRooms[nextPos] = null;
                     roomStatuses[nextPos] = RoomStatus.Reserved;
                     roomPositions.Add(nextPos);
                 }
