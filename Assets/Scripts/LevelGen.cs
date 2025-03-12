@@ -33,6 +33,17 @@ public class LevelGen : MonoBehaviour
 
     private List<Vector2Int> directions = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
+    public enum RoomStatus
+    {
+        Empty,
+        Reserved,
+        Room,
+        DeadEnd
+    }
+
+    private Dictionary<Vector2Int, RoomStatus> roomStatuses = new Dictionary<Vector2Int, RoomStatus>();
+
+
     void Start()
     {
         GenerateLevel();
@@ -65,15 +76,18 @@ public class LevelGen : MonoBehaviour
             GameObject roomGO = Instantiate(roomData.roomPrefab, GetWorldPosition(currentPos), Quaternion.identity);
             roomGO.AddComponent<RoomInstance>().roomData = roomData;
             placedRooms[currentPos] = roomGO;
+            roomStatuses[currentPos] = RoomStatus.Room;
 
             // Добавляем новые фронтиры
             foreach (Vector2Int dir in directions)
             {
                 Vector2Int nextPos = currentPos + dir;
+
                 if (!placedRooms.ContainsKey(nextPos) && IsInBounds(nextPos) && Random.value > 0.3f)
                 {
                     frontier.Enqueue(nextPos);
                     placedRooms[nextPos] = null; // Резерв
+                    roomStatuses[nextPos] = RoomStatus.Reserved;
                     roomPositions.Add(nextPos);
                 }
             }
@@ -181,7 +195,7 @@ public class LevelGen : MonoBehaviour
             foreach (Vector2Int dir in directions)
             {
                 Vector2Int neighborPos = roomPos + dir;
-                if (placedRooms.ContainsKey(neighborPos)) continue;
+                if (placedRooms.ContainsKey(neighborPos) && placedRooms[neighborPos] != null) continue;
 
                 bool hasExit = false;
                 if (dir == Vector2Int.up && data.topExit) hasExit = true;
@@ -189,13 +203,11 @@ public class LevelGen : MonoBehaviour
                 if (dir == Vector2Int.left && data.leftExit) hasExit = true;
                 if (dir == Vector2Int.right && data.rightExit) hasExit = true;
 
-                if (hasExit && IsInBounds(neighborPos))
+                if (hasExit && IsInBounds(neighborPos) && roomStatuses[roomPos] != RoomStatus.DeadEnd)
                 {
-                    
+                    PlaceDeadEnd(neighborPos, -dir);
+                    newPositions.Add(neighborPos); // Добавляем во временный список
                 }
-
-                PlaceDeadEnd(neighborPos, -dir);
-                newPositions.Add(neighborPos); // Добавляем во временный список
             }
         }
 
@@ -214,9 +226,10 @@ public class LevelGen : MonoBehaviour
 
         if (deadEnd != null)
         {
-            GameObject room = Instantiate(deadEnd.roomPrefab, GetWorldPosition(position), Quaternion.identity);
+            GameObject room = Instantiate(deadEnd.roomPrefab, GetWorldPosition(position), GetRotationToDirection(toDirection));
             room.AddComponent<RoomInstance>().roomData = deadEnd;
             placedRooms[position] = room;
+            roomStatuses[position] = RoomStatus.DeadEnd;
             Debug.Log($"Добавлен тупик в {position}");
         }
         else
