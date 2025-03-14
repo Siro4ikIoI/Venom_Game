@@ -624,11 +624,26 @@ MonoBehaviour:
     bottomExit: 1
     leftExit: 1
     rightExit: 1
-  - roomPrefab: {fileID: 725047333427593176, guid: 2a84d4ff992aae049ab4c98c2ee4fefd, type: 3}
-    topExit: 0
-    bottomExit: 0
-    leftExit: 0
-    rightExit: 0
+  - roomPrefab: {fileID: 725047333427593176, guid: fa3935d0d23636a49b82136451f5d51f, type: 3}
+    topExit: 1
+    bottomExit: 1
+    leftExit: 1
+    rightExit: 1
+  - roomPrefab: {fileID: 725047333427593176, guid: b608f52536b2a2542b6c5943ca70cff3, type: 3}
+    topExit: 1
+    bottomExit: 1
+    leftExit: 1
+    rightExit: 1
+  - roomPrefab: {fileID: 725047333427593176, guid: 4039d0b4029e3d44c80f11b05990de70, type: 3}
+    topExit: 1
+    bottomExit: 1
+    leftExit: 1
+    rightExit: 1
+  - roomPrefab: {fileID: 725047333427593176, guid: dc43ea2929dd3c94dab1f8c4a1ac6017, type: 3}
+    topExit: 1
+    bottomExit: 1
+    leftExit: 1
+    rightExit: 1
   startRoomPrefab: {fileID: 725047333427593176, guid: f423fa09b4155494e98dd039f14d68f4, type: 3}
   endRoomPrefab: {fileID: 725047333427593176, guid: 3823198a32ff09b47a906c5a36730f20, type: 3}
   deadEndRooms:
@@ -652,7 +667,12 @@ MonoBehaviour:
     bottomExit: 0
     leftExit: 1
     rightExit: 0
-  maxRooms: 100
+  - roomPrefab: {fileID: 725047333427593176, guid: f343f2c66ffa9484baf78df3dd9467b8, type: 3}
+    topExit: 0
+    bottomExit: 0
+    leftExit: 1
+    rightExit: 0
+  maxRooms: 20
   gridSize: {x: 55, y: 55}
   startPos: {x: 0, y: 0}
 --- !u!4 &1485060375
