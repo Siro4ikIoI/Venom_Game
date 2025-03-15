@@ -1492,7 +1492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4010373008236577342}
   m_Layer: 0
-  m_Name: Conecter
+  m_Name: SpavnKey
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1507,7 +1507,7 @@ Transform:
   m_GameObject: {fileID: 3192650018731376905}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 27.75, y: 0, z: -1.5}
+  m_LocalPosition: {x: 17.499998, y: 1.5, z: -21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1922,7 +1922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4485731239385404298}
   m_Layer: 0
-  m_Name: Conecter
+  m_Name: SpavnKey
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1937,7 +1937,7 @@ Transform:
   m_GameObject: {fileID: 3949222907677131052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -28.5}
+  m_LocalPosition: {x: -17.25, y: 1.5, z: -15.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1984,7 +1984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4698070919740384678}
   m_Layer: 0
-  m_Name: Conecter
+  m_Name: SpavnKey
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1999,7 +1999,7 @@ Transform:
   m_GameObject: {fileID: 4288335560330244546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 28.25}
+  m_LocalPosition: {x: -1.5, y: 1.5, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2055,7 +2055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3137327999004818286}
   m_Layer: 0
-  m_Name: Conecter
+  m_Name: SpavnKey
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2070,7 +2070,7 @@ Transform:
   m_GameObject: {fileID: 4312966331143836292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -27.25, y: 0, z: 0}
+  m_LocalPosition: {x: 16.5, y: 1.5, z: 13.500007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

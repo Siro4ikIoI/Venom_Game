@@ -24,14 +24,16 @@ public class LevelGen : MonoBehaviour
     public List<RoomData> deadEndRooms;
 
     [Header("Настройки генерации")]
-    public int maxRooms = 20;
-    public Vector2Int gridSize = new Vector2Int(10, 10);
+    private int maxRooms = 20;
+    public Vector2Int gridSize = new Vector2Int(55, 55);
     public Vector2Int startPos = Vector2Int.zero;
 
     private Dictionary<Vector2Int, GameObject> placedRooms = new Dictionary<Vector2Int, GameObject>();
     private List<Vector2Int> roomPositions = new List<Vector2Int>();
 
     private List<Vector2Int> directions = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+
+    public static List<Transform> SpavnKeys = new List<Transform>();
 
     public enum RoomStatus
     {
@@ -43,15 +45,16 @@ public class LevelGen : MonoBehaviour
 
     private Dictionary<Vector2Int, RoomStatus> roomStatuses = new Dictionary<Vector2Int, RoomStatus>();
 
-
-    void Start()
+    private void Awake()
     {
         GenerateLevel();
+        GetSpavnKey();
     }
 
     void GenerateLevel()
     {
         Queue<Vector2Int> frontier = new Queue<Vector2Int>();
+        maxRooms = Random.Range(7, 25);
 
         // --- 1. Стартовая комната ---
         var startRoom = Instantiate(startRoomPrefab, GetWorldPosition(startPos), Quaternion.identity);
@@ -83,7 +86,7 @@ public class LevelGen : MonoBehaviour
             {
                 Vector2Int nextPos = currentPos + dir;
 
-                if (!placedRooms.ContainsKey(nextPos) && IsInBounds(nextPos) && Random.value > 0.3f)
+                if (!placedRooms.ContainsKey(nextPos) && IsInBounds(nextPos))
                 {
                     frontier.Enqueue(nextPos);
                     placedRooms[nextPos] = null;
@@ -217,12 +220,7 @@ public class LevelGen : MonoBehaviour
 
     void PlaceDeadEnd(Vector2Int position, Vector2Int toDirection)
     {
-        RoomData deadEnd = deadEndRooms.Find(room =>
-            (toDirection == Vector2Int.up && room.bottomExit) ||
-            (toDirection == Vector2Int.down && room.topExit) ||
-            (toDirection == Vector2Int.left && room.rightExit) ||
-            (toDirection == Vector2Int.right && room.leftExit)
-        );
+        RoomData deadEnd = deadEndRooms[Random.Range(0, deadEndRooms.Count)];
 
         if (deadEnd != null)
         {
@@ -236,5 +234,20 @@ public class LevelGen : MonoBehaviour
         {
             Debug.LogWarning($"Нет тупика для {position} в направлении {toDirection}");
         }
+    }
+
+    void GetSpavnKey()
+    {
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            foreach(Transform child in obj.GetComponentInChildren<Transform>())
+            {
+                if (child.transform.name == "SpavnKey") SpavnKeys.Add(child);
+            }
+        }
+
+        Debug.Log(SpavnKeys.Count);
     }
 }
