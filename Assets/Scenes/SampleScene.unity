@@ -902,6 +902,7 @@ MonoBehaviour:
   startRoomPrefab: {fileID: 725047333427593176, guid: f423fa09b4155494e98dd039f14d68f4, type: 3}
   endRoomPrefab: {fileID: 725047333427593176, guid: 3823198a32ff09b47a906c5a36730f20, type: 3}
   lights: {fileID: 3422199510641113599, guid: 533b22691a4ca3649a524240585fd9eb, type: 3}
+  lightsCube: {fileID: 5526445434995948613, guid: a04cf33575d1db6458370465895223ac, type: 3}
   deadEndRooms:
   - roomPrefab: {fileID: 725047333427593176, guid: f343f2c66ffa9484baf78df3dd9467b8, type: 3}
     topExit: 1
@@ -1046,7 +1047,7 @@ GameObject:
   - component: {fileID: 1934370767}
   - component: {fileID: 1934370772}
   m_Layer: 0
-  m_Name: Blacout
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1066,7 +1067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TohScreen: {fileID: 831812435}
   Joystick_p: {fileID: 238205346}
-  Speed_Player: 14
+  Speed_Player: 10
   mobil: 0
 --- !u!136 &1934370768
 CapsuleCollider:

@@ -20,6 +20,7 @@ public class LevelGen : MonoBehaviour
     public GameObject startRoomPrefab;
     public GameObject endRoomPrefab;
     public GameObject lights;
+    public GameObject lightsCube;
 
     [Header("Тупики (по 1 выходу)")]
     public List<RoomData> deadEndRooms;
@@ -259,9 +260,11 @@ public class LevelGen : MonoBehaviour
     {
         for(int i = 0;i < placedRooms.Count; i++)
         {
-            Vector3 lightPos = new Vector3(roomPositions[i].x * gridSize.x, 15, roomPositions[i].y * gridSize.y);
+            Vector3 lightPos = new Vector3(roomPositions[i].x * gridSize.x, 12, roomPositions[i].y * gridSize.y);
+            Vector3 lightPosCube = new Vector3(roomPositions[i].x * gridSize.x, 13.5f, roomPositions[i].y * gridSize.y);
             if (Random.Range(0, 100) < 35 || lightPos == Vector3.zero) continue;
             Instantiate(lights, lightPos, Quaternion.identity);
+            Instantiate(lightsCube, lightPosCube, Quaternion.identity);
         }
     }
 }
