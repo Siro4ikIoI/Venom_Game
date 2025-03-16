@@ -19,6 +19,7 @@ public class LevelGen : MonoBehaviour
     public List<RoomData> roomTemplates;
     public GameObject startRoomPrefab;
     public GameObject endRoomPrefab;
+    public GameObject lights;
 
     [Header("Тупики (по 1 выходу)")]
     public List<RoomData> deadEndRooms;
@@ -108,6 +109,9 @@ public class LevelGen : MonoBehaviour
 
         // --- 5. Заполняем пустоты тупиками ---
         FillEmptySpacesWithDeadEnds();
+
+        // --- 6. Добовляем освищение ---
+        RoomLightingGenitization();
 
         Debug.Log($"Итоговое количество комнат: {placedRooms.Count}");
     }
@@ -249,5 +253,15 @@ public class LevelGen : MonoBehaviour
         }
 
         Debug.Log(SpavnKeys.Count);
+    }
+
+    void RoomLightingGenitization()
+    {
+        for(int i = 0;i < placedRooms.Count; i++)
+        {
+            Vector3 lightPos = new Vector3(roomPositions[i].x * gridSize.x, 15, roomPositions[i].y * gridSize.y);
+            if (Random.Range(0, 100) < 35 || lightPos == Vector3.zero) continue;
+            Instantiate(lights, lightPos, Quaternion.identity);
+        }
     }
 }
