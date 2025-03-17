@@ -1,0 +1,102 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Inventory_list : MonoBehaviour
+{
+    [Header("Инвентарь")]
+    public Transform PL_place_obg;
+    public List<Object_haracter> list_inventory = new List<Object_haracter>();
+    public List<GameObject> list_Button = new List<GameObject>();
+
+
+    private Camera Main_Camera;
+    private int indx_now_obj;
+
+
+    // Создать в редакторе в списке пустой список из null
+    void Start()
+    {
+        Main_Camera = Camera.main;
+    }
+
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray main_center = Main_Camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            if (Physics.Raycast(main_center, out hit))
+            {
+                if (hit.transform.GetComponent<Object_haracter>() != null)
+                    Add_list(hit.transform.GetComponent<Object_haracter>());
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Drop_obj();
+        }
+    }
+
+
+    public void Add_list(Object_haracter object_game)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (list_inventory[i] == null)
+            {
+                list_inventory[i] = object_game;
+                Click_obj(list_inventory.IndexOf(object_game));//
+                object_game.gameObject.SetActive(false);
+                break;
+            }
+        }
+
+        Update_list_inventory();
+    }
+
+    public void Update_list_inventory()
+    {
+        for (int i = 0; i < list_inventory.Count; i++)
+        {
+            if (list_inventory[i] != null)
+            {
+                list_Button[i].GetComponent<Image>().sprite = list_inventory[i].GetComponent<Object_haracter>().sprite_obj;
+                list_inventory[i].transform.SetParent(PL_place_obg);
+            }
+
+        }
+    }
+
+    public void Click_obj(int indx)
+    {
+
+        list_inventory[indx].transform.position = PL_place_obg.position;
+        if (list_inventory[indx] != null)
+        {
+            list_inventory[indx_now_obj].gameObject.SetActive(false);
+            list_inventory[indx].gameObject.SetActive(true);
+            list_inventory[indx].GetComponent<Rigidbody>().isKinematic = true;
+            indx_now_obj = indx;
+        }
+
+    }
+
+    public void Drop_obj()
+    {
+        if (list_inventory[indx_now_obj] != null)
+        {
+            list_inventory[indx_now_obj].transform.SetParent(null);
+            list_inventory[indx_now_obj].GetComponent<Rigidbody>().isKinematic = false;
+            list_Button[indx_now_obj].GetComponent<Image>().sprite = null;
+            //list_inventory.RemoveAt(indx_now_obj);
+            list_inventory[indx_now_obj] = null;
+
+            Update_list_inventory();
+        }
+
+    }
+}

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_forward : MonoBehaviour
 {
@@ -11,15 +13,21 @@ public class Player_forward : MonoBehaviour
     private float xhR = 0f;
     private float yhR = 0f;
 
+
+
     private Camera Main_Camera;
+    private Rigidbody rigidbody_pl;
+
     void Start()
     {
         Main_Camera = Camera.main;
+        rigidbody_pl = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (mobil)
         {
             float mouseX = 0;
@@ -53,7 +61,8 @@ public class Player_forward : MonoBehaviour
             hor_input = Joystick_p.Horizontal;
             ver_input = Joystick_p.Vertical;
             Vector3 moveVektor = (new Vector3(Main_Camera.transform.forward.x, 0f, Main_Camera.transform.forward.z) * ver_input + Main_Camera.transform.right * hor_input) * Time.deltaTime * Speed_Player;
-            transform.Translate(moveVektor, Space.World);
+            //transform.Translate(moveVektor, Space.World);
+            rigidbody_pl.AddForce(moveVektor);
         }
         else
         {
@@ -66,8 +75,11 @@ public class Player_forward : MonoBehaviour
             Main_Camera.transform.localRotation = Quaternion.Euler(-yhR, xhR, 0);
             Vector3 moveVektor = (new Vector3(Main_Camera.transform.forward.x, 0f, Main_Camera.transform.forward.z) * Input.GetAxis("Vertical") + Main_Camera.transform.right * Input.GetAxis("Horizontal")) * Time.deltaTime * Speed_Player;
             transform.Translate(moveVektor, Space.World);
+            //rigidbody_pl.AddForce(moveVektor*50);
+            //rigidbody_pl.MovePosition(transform.position + moveVektor*10);
         }
 
         
     }
+
 }
