@@ -12,7 +12,7 @@ public class Inventory_list : MonoBehaviour
 
 
     private Camera Main_Camera;
-    private int indx_now_obj;
+    private int indx_now_obj = 3;
 
 
     // Создать в редакторе в списке пустой список из null
@@ -39,6 +39,10 @@ public class Inventory_list : MonoBehaviour
         {
             Drop_obj();
         }
+
+        if (Input.mouseScrollDelta.y >= 0) {
+            
+        }
     }
 
 
@@ -49,8 +53,10 @@ public class Inventory_list : MonoBehaviour
             if (list_inventory[i] == null)
             {
                 list_inventory[i] = object_game;
-                Click_obj(list_inventory.IndexOf(object_game));//
                 object_game.gameObject.SetActive(false);
+                list_inventory[i].transform.SetParent(PL_place_obg);
+                Click_obj(list_inventory.IndexOf(object_game));//
+
                 break;
             }
         }
@@ -65,7 +71,7 @@ public class Inventory_list : MonoBehaviour
             if (list_inventory[i] != null)
             {
                 list_Button[i].GetComponent<Image>().sprite = list_inventory[i].GetComponent<Object_haracter>().sprite_obj;
-                list_inventory[i].transform.SetParent(PL_place_obg);
+                
             }
 
         }
@@ -74,10 +80,12 @@ public class Inventory_list : MonoBehaviour
     public void Click_obj(int indx)
     {
 
-        list_inventory[indx].transform.position = PL_place_obg.position;
+
         if (list_inventory[indx] != null)
         {
-            list_inventory[indx_now_obj].gameObject.SetActive(false);
+            list_inventory[indx].transform.position = PL_place_obg.position;
+            if(list_inventory[indx_now_obj] != null && list_inventory[indx_now_obj].gameObject.activeSelf) list_inventory[indx_now_obj].gameObject.SetActive(false);
+
             list_inventory[indx].gameObject.SetActive(true);
             list_inventory[indx].GetComponent<Rigidbody>().isKinematic = true;
             indx_now_obj = indx;
