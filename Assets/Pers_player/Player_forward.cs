@@ -1,85 +1,107 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player_forward : MonoBehaviour
+public class PlayerForward : MonoBehaviour
 {
-    public TohScreen TohScreen;
-    public Joystick Joystick_p;
-    public float Speed_Player;
-    public bool mobil;
-    private float xhR = 0f;
-    private float yhR = 0f;
+    [Header("References")]
+    public TohScreen tohScreen;
+    public Joystick joystick;
+    private Camera mainCamera;
+    private Rigidbody playerRigidbody;
+    private Animator playerAnim;
+    public Animator playerAnimCanvos;
+    public GameObject deathPanel;
+    public RuntimeAnimatorController playerController;
 
 
 
-    private Camera Main_Camera;
-    private Rigidbody rigidbody_pl;
+    [Header("Settings")]
+    public float playerSpeed = 5f;
+    public bool isMobile;
+
+    private float rotationX = 0f;
+    private float rotationY = 0f;
+
+    public bool _isDeath = false;
 
     void Start()
     {
-        Main_Camera = Camera.main;
-        rigidbody_pl = GetComponent<Rigidbody>();
+        mainCamera = Camera.main;
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        if (mobil)
+        if (isMobile)
         {
-            float mouseX = 0;
-            float mouseY = 0;
-
-            if (TohScreen.pressed)
-            {
-                foreach (Touch touch in Input.touches)
-                {
-                    if (touch.fingerId == TohScreen.finger)
-                    {
-                        if (touch.phase == TouchPhase.Moved)
-                        {
-                            mouseX += touch.deltaPosition.x * Time.deltaTime * TohScreen.fingerSpeed;
-                            mouseY += touch.deltaPosition.y * Time.deltaTime * TohScreen.fingerSpeed;
-                            xhR += mouseX;
-                            yhR += mouseY;
-                            Main_Camera.transform.localRotation = Quaternion.Euler(-yhR, xhR, 0);
-                        }
-                        if (touch.phase == TouchPhase.Stationary)
-                        {
-                            mouseX = 0;
-                        }
-                    }
-                }
-            }
-
-            float hor_input = 0f;
-            float ver_input = 0f;
-
-            hor_input = Joystick_p.Horizontal;
-            ver_input = Joystick_p.Vertical;
-            Vector3 moveVektor = (new Vector3(Main_Camera.transform.forward.x, 0f, Main_Camera.transform.forward.z) * ver_input + Main_Camera.transform.right * hor_input) * Time.deltaTime * Speed_Player;
-            //transform.Translate(moveVektor, Space.World);
-            rigidbody_pl.AddForce(moveVektor);
+            HandleMobileInput();
         }
         else
         {
-            float mouseX = Input.GetAxis("Mouse X");
-            float mouseY = Input.GetAxis("Mouse Y");
-
-            xhR += mouseX;
-            yhR += mouseY;
-
-            Main_Camera.transform.localRotation = Quaternion.Euler(-yhR, xhR, 0);
-            Vector3 moveVektor = (new Vector3(Main_Camera.transform.forward.x, 0f, Main_Camera.transform.forward.z) * Input.GetAxis("Vertical") + Main_Camera.transform.right * Input.GetAxis("Horizontal")) * Time.deltaTime * Speed_Player;
-            transform.Translate(moveVektor, Space.World);
-            //rigidbody_pl.AddForce(moveVektor*50);
-            //rigidbody_pl.MovePosition(transform.position + moveVektor*10);
+            HandlePCInput();
         }
 
-        
+        if (_isDeath) PlayerDeath();
     }
 
+    private void HandleMobileInput()
+    {
+        float mouseX = 0;
+        float mouseY = 0;
+
+        if (tohScreen.pressed)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.fingerId == tohScreen.finger)
+                {
+                    if (touch.phase == TouchPhase.Moved)
+                    {
+                        mouseX += touch.deltaPosition.x * Time.deltaTime * tohScreen.fingerSpeed;
+                        mouseY += touch.deltaPosition.y * Time.deltaTime * tohScreen.fingerSpeed;
+                        rotationX += mouseX;
+                        rotationY += mouseY;
+                        mainCamera.transform.localRotation = Quaternion.Euler(-rotationY, rotationX, 0);
+                    }
+                }
+            }
+        }
+
+        Vector3 moveVector = CalculateMovement(joystick.Horizontal, joystick.Vertical);
+        playerRigidbody.AddForce(moveVector);
+    }
+
+    private void HandlePCInput()
+    {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        rotationX += mouseX;
+        rotationY += mouseY;
+        mainCamera.transform.localRotation = Quaternion.Euler(-rotationY, rotationX, 0);
+
+        Vector3 moveVector = CalculateMovement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        transform.Translate(moveVector, Space.World);
+    }
+
+    private Vector3 CalculateMovement(float horizontal, float vertical)
+    {
+        Vector3 forwardMovement = new Vector3(mainCamera.transform.forward.x, 0f, mainCamera.transform.forward.z) * vertical;
+        Vector3 rightMovement = mainCamera.transform.right * horizontal;
+        return (forwardMovement + rightMovement) * Time.deltaTime * playerSpeed;
+    }
+
+    public void PlayerDeath()
+    {
+        mainCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        gameObject.AddComponent<Animator>();
+        playerAnim = GetComponent<Animator>();
+        playerAnim.runtimeAnimatorController = playerController;
+        deathPanel.SetActive(true);
+        playerAnim.SetBool("deaeth", _isDeath);
+        playerAnimCanvos.SetBool("death", _isDeath);
+        _isDeath = false;
+    }
 }
