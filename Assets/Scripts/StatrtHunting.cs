@@ -1,65 +1,108 @@
 using System.Collections;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.UI; // Для отображения таймера в UI
+using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour
 {
+    [Header("Настройки таймера")]
     public float timeRemaining = 60f;
     public Text timerText;
-    public bool _error = false;
-    public GameObject[] timer;
+
+    [Header("Игровые объекты")]
+    public GameObject[] timerObjects;
     public GameObject audioBlackout;
-    public GameObject audioBlackoutTheam;
-    public GameObject audioMian;
+    public GameObject audioBlackoutTheme;
+    public GameObject audioMain;
     public GameObject audioSiren;
+
     private GameObject venomOpen;
+    public bool isCounting = false;
 
     private void Start()
     {
+        // Поиск объекта "Laser" внутри "Map_Venom(Clone)"
         GameObject venomObject = GameObject.Find("Map_Venom(Clone)");
-        venomOpen = venomObject.transform.Find("Laser")?.gameObject;
+        if (venomObject != null)
+        {
+            Transform laserTransform = venomObject.transform.Find("Laser");
+            if (laserTransform != null)
+            {
+                venomOpen = laserTransform.gameObject;
+            }
+        }
     }
 
     private void Update()
     {
-        Error();
+        TryStartCountdown();
     }
 
     private IEnumerator StartCountdown()
     {
+        isCounting = true;
+
         while (timeRemaining > 0)
         {
-            timeRemaining -= 1;
-            if (timerText != null && timeRemaining > 9)
-                timerText.text = "00:" + timeRemaining.ToString("0");
-            if (timerText != null && timeRemaining <= 9)
-                timerText.text = "00:0" + timeRemaining.ToString("0");
+            timeRemaining--;
+            UpdateTimerText();
             yield return new WaitForSeconds(1f);
         }
 
         TimerEnded();
     }
 
+    private void UpdateTimerText()
+    {
+        if (timerText != null)
+        {
+            timerText.text = $"00:{timeRemaining:00}";
+        }
+    }
+
     private void TimerEnded()
     {
         Debug.Log("Таймер истек! Происходит событие...");
-        venomOpen.SetActive(false);
-        foreach(GameObject objs in timer) objs.SetActive(false);
-        audioBlackout.GetComponent<AudioSource>().Play();
-        audioBlackoutTheam.GetComponent<AudioSource>().Play();
-        audioSiren.GetComponent<AudioSource>().Stop();
+
+        if (venomOpen != null)
+        {
+            venomOpen.SetActive(false);
+        }
+
+        foreach (GameObject obj in timerObjects)
+        {
+            obj.SetActive(false);
+        }
+
+        PlayBlackoutEffects();
     }
 
-    public void Error()
+    private void PlayBlackoutEffects()
     {
-        if (_error)
+        if (audioBlackout != null) audioBlackout.GetComponent<AudioSource>()?.Play();
+        if (audioBlackoutTheme != null) audioBlackoutTheme.GetComponent<AudioSource>()?.Play();
+        if (audioSiren != null) audioSiren.GetComponent<AudioSource>()?.Stop();
+
+        RenderSettings.fog = true;
+        RenderSettings.fogColor = Color.black;
+        RenderSettings.fogDensity = 0.04f;
+    }
+
+    public void TryStartCountdown()
+    {
+        if (isCounting)
         {
-            foreach (GameObject objs in timer) objs.SetActive(true);
+            foreach (GameObject obj in timerObjects)
+            {
+                obj.SetActive(true);
+            }
+
+            timerObjects[0].SetActive(true);
             StartCoroutine(StartCountdown());
-            audioMian.GetComponent<AudioSource>().Stop();
-            audioSiren.GetComponent<AudioSource>().Play();
-            _error = false;
-        } 
+
+            if (audioMain != null) audioMain.GetComponent<AudioSource>()?.Stop();
+            if (audioSiren != null) audioSiren.GetComponent<AudioSource>()?.Play();
+
+            isCounting = false;
+        }
     }
 }

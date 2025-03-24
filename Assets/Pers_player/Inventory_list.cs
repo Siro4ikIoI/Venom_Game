@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory_list : MonoBehaviour
 {
+    public static Inventory_list instante { get; set; }
     [Header("Инвентарь")]
     public Transform PL_place_obg;
     public List<Object_haracter> list_inventory = new List<Object_haracter>();
@@ -13,12 +15,13 @@ public class Inventory_list : MonoBehaviour
 
 
     private Camera Main_Camera;
-    private int indx_now_obj = 3;
+    public int indx_now_obj = 4;
 
 
     // Создать в редакторе в списке пустой список из null
     void Start()
     {
+        instante = this;
         Main_Camera = Camera.main;
     }
 
@@ -53,6 +56,7 @@ public class Inventory_list : MonoBehaviour
         {
             if (list_inventory[i] == null)
             {
+                object_game.transform.rotation = object_game.savedRotation;
                 list_inventory[i] = object_game;
                 object_game.gameObject.SetActive(false);
                 list_inventory[i].transform.SetParent(PL_place_obg);
@@ -80,15 +84,12 @@ public class Inventory_list : MonoBehaviour
     {
         if (list_inventory[indx] != null)
         {
-            list_inventory[indx].transform.position = PL_place_obg.position;
-            list_inventory[indx].transform.rotation = Quaternion.Euler(0, 0, 0);
-            if (list_inventory[indx_now_obj] != null && list_inventory[indx_now_obj].gameObject.activeSelf) list_inventory[indx_now_obj].gameObject.SetActive(false);
-
             list_inventory[indx].gameObject.SetActive(true);
+            list_inventory[indx].transform.position = PL_place_obg.position;
+
             list_inventory[indx].GetComponent<Rigidbody>().isKinematic = true;
             indx_now_obj = indx;
         }
-
     }
 
     public void Drop_obj()
@@ -98,7 +99,6 @@ public class Inventory_list : MonoBehaviour
             list_inventory[indx_now_obj].transform.SetParent(null);
             list_inventory[indx_now_obj].GetComponent<Rigidbody>().isKinematic = false;
             list_Button[indx_now_obj].gameObject.transform.Find("Image").GetComponent<Image>().sprite = null;
-            //list_inventory.RemoveAt(indx_now_obj);
             list_inventory[indx_now_obj] = null;
 
             Update_list_inventory();
