@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Object_haracter : MonoBehaviour
 {
-    public Quaternion savedRotation;
+    // Поставить столкновение со слоем Player в Exclud layers
     public Sprite sprite_obj;
+
 }

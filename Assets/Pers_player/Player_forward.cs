@@ -1,107 +1,179 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerForward : MonoBehaviour
+public class Player_forward : MonoBehaviour
 {
-    [Header("References")]
-    public TohScreen tohScreen;
-    public Joystick joystick;
-    private Camera mainCamera;
-    private Rigidbody playerRigidbody;
-    private Animator playerAnim;
-    public Animator playerAnimCanvos;
-    public GameObject deathPanel;
-    public RuntimeAnimatorController playerController;
+    public TohScreen TohScreen;
+    public Joystick Joystick_p;
+    public float Speed_Player;
+    public bool mobil;
+
+    public Slider stamina_sl;
+    public float max_stamina = 10;
+
+    private float xhR = 0f;
+    private float yhR = 0f;
 
 
 
-    [Header("Settings")]
-    public float playerSpeed = 5f;
-    public bool isMobile;
-
-    private float rotationX = 0f;
-    private float rotationY = 0f;
-
-    public bool _isDeath = false;
-
+    private Camera Main_Camera;
+    private Rigidbody rigidbody_pl;
+    private CharacterController characterController;
+    private float timer = 0;
+    private bool isCrouching = false;
+    private float standart_pl_y;
+    private float standart_pl_y_half;
+    private float standart_speed;
+    private float standart_camera_y;
+    private float standart_camera_x;
     void Start()
     {
-        mainCamera = Camera.main;
-        playerRigidbody = GetComponent<Rigidbody>();
+        standart_speed = Speed_Player;
+        Main_Camera = Camera.main;
+        standart_camera_y = Main_Camera.transform.position.y;
+        standart_camera_x = Main_Camera.transform.position.x;
+        characterController = GetComponent<CharacterController>();
+        standart_pl_y = characterController.height;
+        standart_pl_y_half = characterController.height / 2;
+        stamina_sl.maxValue = max_stamina;
+        //rigidbody_pl = GetComponent<Rigidbody>();
+    }
+
+    public void Sit_down(bool ch)
+    {
+        isCrouching = !isCrouching;
+        if (ch)
+            characterController.height = standart_pl_y;
+            //transform.localScale = new Vector3(transform.localScale.x, standart_pl_y, transform.localScale.z);
+        else
+            characterController.height = standart_pl_y_half;
+        //transform.localScale = new Vector3(transform.localScale.x, standart_pl_y_half, transform.localScale.z);
+    }
+
+    public void Sit_down_MOBIl()
+    {
+        isCrouching = !isCrouching;
+        if (isCrouching)
+            transform.localScale = new Vector3(transform.localScale.x, standart_pl_y, transform.localScale.z);
+        else
+            transform.localScale = new Vector3(transform.localScale.x, standart_pl_y_half, transform.localScale.z);
+    }
+
+    public void Run_Vasy_run()
+    {
+        Speed_Player = standart_speed * 2;
+        max_stamina -= Time.deltaTime;
+        stamina_sl.value = max_stamina;
     }
 
     void Update()
     {
-        if (isMobile)
-        {
-            HandleMobileInput();
-        }
-        else
-        {
-            HandlePCInput();
-        }
 
-        if (_isDeath) PlayerDeath();
-    }
-
-    private void HandleMobileInput()
-    {
-        float mouseX = 0;
-        float mouseY = 0;
-
-        if (tohScreen.pressed)
+        if (mobil)
         {
-            foreach (Touch touch in Input.touches)
+            float mouseX = 0;
+            float mouseY = 0;
+
+            if (TohScreen.pressed)
             {
-                if (touch.fingerId == tohScreen.finger)
+                foreach (Touch touch in Input.touches)
                 {
-                    if (touch.phase == TouchPhase.Moved)
+                    if (touch.fingerId == TohScreen.finger)
                     {
-                        mouseX += touch.deltaPosition.x * Time.deltaTime * tohScreen.fingerSpeed;
-                        mouseY += touch.deltaPosition.y * Time.deltaTime * tohScreen.fingerSpeed;
-                        rotationX += mouseX;
-                        rotationY += mouseY;
-                        mainCamera.transform.localRotation = Quaternion.Euler(-rotationY, rotationX, 0);
+                        if (touch.phase == TouchPhase.Moved)
+                        {
+                            mouseX += touch.deltaPosition.x * Time.deltaTime * TohScreen.fingerSpeed;
+                            mouseY += touch.deltaPosition.y * Time.deltaTime * TohScreen.fingerSpeed;
+                            xhR += mouseX;
+                            yhR += mouseY;
+                            Main_Camera.transform.localRotation = Quaternion.Euler(-yhR, xhR, 0);
+                        }
+                        if (touch.phase == TouchPhase.Stationary)
+                        {
+                            mouseX = 0;
+                        }
                     }
                 }
             }
+
+            float hor_input = 0f;
+            float ver_input = 0f;
+
+            hor_input = Joystick_p.Horizontal;
+            ver_input = Joystick_p.Vertical;
+            Vector3 moveVektor = (new Vector3(Main_Camera.transform.forward.x, 0f, Main_Camera.transform.forward.z) * ver_input + Main_Camera.transform.right * hor_input) * Time.deltaTime * Speed_Player;
+            //transform.Translate(moveVektor, Space.World);
+            //rigidbody_pl.AddForce(moveVektor);
+        }
+        else
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+
+            xhR += mouseX;
+            yhR += mouseY;
+            yhR = Mathf.Clamp(yhR, -90, 87);
+
+            Main_Camera.transform.localRotation = Quaternion.Euler(-yhR, xhR, 0);
+            Vector3 moveVektor = (new Vector3(Main_Camera.transform.forward.x, 0f, Main_Camera.transform.forward.z) * Input.GetAxis("Vertical") + Main_Camera.transform.right * Input.GetAxis("Horizontal")) * Time.deltaTime * Speed_Player;
+            //transform.Translate(moveVektor, Space.World);
+            //rigidbody_pl.AddForce(moveVektor*50);
+            //rigidbody_pl.MovePosition(transform.position + transform.TransformVector(moveVektor*2));
+            characterController.Move(transform.TransformVector(moveVektor));
+
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                Sit_down(false);
+            }
+            else
+            {
+                Sit_down(true);
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift) && max_stamina > 1)
+            {
+                Run_Vasy_run();
+            }
+            else
+            {
+                Speed_Player = standart_speed;
+                if (stamina_sl.maxValue >= max_stamina)
+                {
+                    max_stamina += Time.deltaTime * 0.5f;
+                    stamina_sl.value = max_stamina;
+                }
+
+            }
         }
 
-        Vector3 moveVector = CalculateMovement(joystick.Horizontal, joystick.Vertical);
-        playerRigidbody.AddForce(moveVector);
+        //if (!characterController.isGrounded) {
+        //    characterController.Move(new Vector3(0f, -6f, 0f));
+        //}
+        
+        // -----------Качание камеры------------------
+
+        if (characterController.velocity.magnitude >= 0.1f)
+        {
+            print("555");
+            print(characterController.velocity.magnitude);
+            timer += Time.deltaTime * 5;
+            Main_Camera.transform.localPosition = new Vector3(standart_camera_x + Mathf.Sin(timer * 1.2f) * 0.25f / 2, standart_camera_y + Mathf.Sin(timer*2.4f) * 0.2f / 2, Main_Camera.transform.localPosition.z);
+            //Main_Camera.transform.localRotation = Quaternion.Euler(0, 0, Mathf.Cos(timer * 1.2f) * 1f);
+        }
+        else
+        {
+            timer = 0;
+            Main_Camera.transform.localPosition = new Vector3(Mathf.Lerp(Main_Camera.transform.localPosition.x, standart_camera_x, 0.1f), Mathf.Lerp(Main_Camera.transform.localPosition.y, standart_camera_y, 0.1f), Main_Camera.transform.localPosition.z);
+        }
     }
 
-    private void HandlePCInput()
+    private void FixedUpdate()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
-        rotationX += mouseX;
-        rotationY += mouseY;
-        mainCamera.transform.localRotation = Quaternion.Euler(-rotationY, rotationX, 0);
-
-        Vector3 moveVector = CalculateMovement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        transform.Translate(moveVector, Space.World);
-    }
-
-    private Vector3 CalculateMovement(float horizontal, float vertical)
-    {
-        Vector3 forwardMovement = new Vector3(mainCamera.transform.forward.x, 0f, mainCamera.transform.forward.z) * vertical;
-        Vector3 rightMovement = mainCamera.transform.right * horizontal;
-        return (forwardMovement + rightMovement) * Time.deltaTime * playerSpeed;
-    }
-
-    public void PlayerDeath()
-    {
-        mainCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        gameObject.AddComponent<Animator>();
-        playerAnim = GetComponent<Animator>();
-        playerAnim.runtimeAnimatorController = playerController;
-        deathPanel.SetActive(true);
-        playerAnim.SetBool("deaeth", _isDeath);
-        playerAnimCanvos.SetBool("death", _isDeath);
-        _isDeath = false;
+        if (!characterController.isGrounded) {
+            characterController.Move(new Vector3(0f, -6f, 0f));
+        }
     }
 }
