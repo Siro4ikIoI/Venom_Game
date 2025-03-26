@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1330008430314102205}
   - component: {fileID: 8638973575172962755}
   - component: {fileID: 4609719041365944636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 12504758875098842}
   - component: {fileID: 5260736090697844411}
   - component: {fileID: 8410601148805055293}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 2081882465194584216}
   - component: {fileID: 3408283557437447328}
   - component: {fileID: 5814033510604584777}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 4587434122854587311}
   - component: {fileID: 4065209816277075022}
   - component: {fileID: 7872495774659025558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 4065202981084440642}
   - component: {fileID: 3151258592309006305}
   - component: {fileID: 31294547835223065}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Latch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 373153115584108515}
   - component: {fileID: 1510372442041534803}
   - component: {fileID: 4508011565682373407}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 2802378086849754502}
   - component: {fileID: 7252087764815982734}
   - component: {fileID: 1968797707789581692}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 7861336969626832512}
   - component: {fileID: 7659802281829791142}
   - component: {fileID: 3399895796764779677}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +830,7 @@ GameObject:
   - component: {fileID: 8097598808727829582}
   - component: {fileID: 418194492895354960}
   - component: {fileID: 506448406145283014}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 2437297828406809319}
   - component: {fileID: 178764587711508606}
   - component: {fileID: 4411272687631500168}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1037,7 +1037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5526199731088552126}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ToolboxLid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,7 +1073,7 @@ GameObject:
   - component: {fileID: 7256374011539011960}
   - component: {fileID: 1811755023841516821}
   - component: {fileID: 2512447602047029138}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,7 +1178,7 @@ GameObject:
   - component: {fileID: 7729930101394132159}
   - component: {fileID: 6862026766738067187}
   - component: {fileID: 318201577037334819}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 884715817393234771}
   - component: {fileID: 335621783793718999}
   - component: {fileID: 4951920407672593568}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 8084769498863684144}
   - component: {fileID: 3364542903723327277}
   - component: {fileID: 4166182853990609787}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MesagesTriger (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1462,7 @@ GameObject:
   - component: {fileID: 7361903552798538370}
   - component: {fileID: 759125911263963600}
   - component: {fileID: 4275530198129667021}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1567,7 +1567,7 @@ GameObject:
   - component: {fileID: 8787104356948646413}
   - component: {fileID: 6101095137803242690}
   - component: {fileID: 341619798144395661}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1672,7 +1672,7 @@ GameObject:
   - component: {fileID: 6796347056310773683}
   - component: {fileID: 5195065552452710087}
   - component: {fileID: 3676661178927282032}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1777,7 +1777,7 @@ GameObject:
   - component: {fileID: 9075243263723008175}
   - component: {fileID: 8801339189628045206}
   - component: {fileID: 8785933402341376635}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1882,7 +1882,7 @@ GameObject:
   - component: {fileID: 43023133084592457}
   - component: {fileID: 366632264162349793}
   - component: {fileID: 5371915418374955877}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,7 +1987,7 @@ GameObject:
   - component: {fileID: 6067121935592056917}
   - component: {fileID: 1150629474915930144}
   - component: {fileID: 107004301647529186}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2092,7 +2092,7 @@ GameObject:
   - component: {fileID: 5567379132340026484}
   - component: {fileID: 5156760173803165774}
   - component: {fileID: 4040192501099942342}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2197,7 +2197,7 @@ GameObject:
   - component: {fileID: 7608738671289619857}
   - component: {fileID: 5269313017431507887}
   - component: {fileID: 2470151129625372377}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2303,7 +2303,7 @@ GameObject:
   - component: {fileID: 8026490061854463235}
   - component: {fileID: 8143848108123387552}
   - component: {fileID: -3748053970099583916}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Toolbox
   m_TagString: ToolBOX
   m_Icon: {fileID: 0}
@@ -2342,7 +2342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74e0a1c82589c34d96590988dc2357f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savedRotation: {x: 0, y: 0, z: 0, w: 0}
   sprite_obj: {fileID: 21300000, guid: d8879a8c500a60c429f08e7ef7f0b177, type: 3}
 --- !u!65 &8026490061854463235
 BoxCollider:
@@ -2417,7 +2416,7 @@ GameObject:
   - component: {fileID: 1718947727154117384}
   - component: {fileID: 4135036664502717416}
   - component: {fileID: 3120347892417896473}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ToolboxTray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2501,7 +2500,7 @@ GameObject:
   - component: {fileID: 273460365533131289}
   - component: {fileID: 4993654692046814544}
   - component: {fileID: 9028523574493804305}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2606,7 +2605,7 @@ GameObject:
   - component: {fileID: 32132417828373450}
   - component: {fileID: 686296909752801987}
   - component: {fileID: 3270349146790296141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2711,7 +2710,7 @@ GameObject:
   - component: {fileID: 8356445732539342002}
   - component: {fileID: 259239003018122654}
   - component: {fileID: 6764749299209372455}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2816,7 +2815,7 @@ GameObject:
   - component: {fileID: 7791118970894240377}
   - component: {fileID: 5109952092126008869}
   - component: {fileID: 3894289287377676611}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2920,7 +2919,7 @@ GameObject:
   - component: {fileID: 3007789018381313403}
   - component: {fileID: 1274990718786563502}
   - component: {fileID: 4134242488553701880}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3004,7 +3003,7 @@ GameObject:
   - component: {fileID: 743562067302925122}
   - component: {fileID: 9194495947238179196}
   - component: {fileID: 8105962537671718245}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3109,7 +3108,7 @@ GameObject:
   - component: {fileID: 230356779579135126}
   - component: {fileID: 5513224643164791162}
   - component: {fileID: 6252181192362071425}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3214,7 +3213,7 @@ GameObject:
   - component: {fileID: 7145221366942547071}
   - component: {fileID: 9145238530046387105}
   - component: {fileID: 8487598959194672970}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3318,7 +3317,7 @@ GameObject:
   - component: {fileID: 6882960334503748615}
   - component: {fileID: 2274268956996314156}
   - component: {fileID: 537942320830582823}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ToolboxBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3435,7 +3434,7 @@ GameObject:
   - component: {fileID: 321538606076815003}
   - component: {fileID: 134060406003350523}
   - component: {fileID: 2894660687219958190}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3540,7 +3539,7 @@ GameObject:
   - component: {fileID: 7042439242979523974}
   - component: {fileID: 5682614921867432700}
   - component: {fileID: 6526615103960013698}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3645,7 +3644,7 @@ GameObject:
   - component: {fileID: 3874743836707824295}
   - component: {fileID: 441591950571692882}
   - component: {fileID: 1042092049560655297}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3750,7 +3749,7 @@ GameObject:
   - component: {fileID: 3936778747855371170}
   - component: {fileID: 129948277834639638}
   - component: {fileID: 936681068337941678}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3854,7 +3853,7 @@ GameObject:
   - component: {fileID: 1026370410145055439}
   - component: {fileID: 4064192334339038007}
   - component: {fileID: 7066798820007170471}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3938,7 +3937,7 @@ GameObject:
   - component: {fileID: 8878321780634638053}
   - component: {fileID: 7755399470024890707}
   - component: {fileID: 3242281522700775129}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WireB (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

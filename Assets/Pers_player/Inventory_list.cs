@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +14,15 @@ public class Inventory_list : MonoBehaviour
     public LayerMask Layer_obj;
 
     private Camera Main_Camera;
-    private int indx_now_obj = 3;
+    public int indx_now_obj = 3;
+
+    public static Inventory_list instante { get; set; }
 
 
     // Создать в редакторе в списке пустой список из null
     void Start()
     {
+        instante = this;
         Main_Camera = Camera.main;
     }
 

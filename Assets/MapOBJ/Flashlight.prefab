@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3726924070161372572}
   - component: {fileID: 4477153867837328412}
   - component: {fileID: 4573055404166094190}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: -529413624798775890}
   - component: {fileID: -5205937485533688785}
   - component: {fileID: -7321776484389883976}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74e0a1c82589c34d96590988dc2357f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savedRotation: {x: 0, y: 0, z: 0, w: 0}
   sprite_obj: {fileID: 21300000, guid: 2d9e0121d7032fa448538be86a48b6ca, type: 3}
 --- !u!54 &-5205937485533688785
 Rigidbody:
@@ -281,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8615711659652882666}
   - component: {fileID: 6122434621731502669}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +376,7 @@ GameObject:
   - component: {fileID: 870629963241991234}
   - component: {fileID: 3531437782603090238}
   - component: {fileID: 6199241785723006128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

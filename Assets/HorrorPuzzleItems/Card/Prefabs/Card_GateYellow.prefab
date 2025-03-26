@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8501078846304557891}
   - component: {fileID: 904510793400573631}
   - component: {fileID: 204824920633828404}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -4365788112978922279}
   - component: {fileID: -4769595439002606974}
   - component: {fileID: 2756384100026923219}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Card_GateYellow
   m_TagString: Keys
   m_Icon: {fileID: 0}
@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74e0a1c82589c34d96590988dc2357f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  savedRotation: {x: 0, y: 0, z: 0, w: 0}
   sprite_obj: {fileID: 21300000, guid: dae2b16df388c2647801ea7334b766b7, type: 3}
 --- !u!65 &-4365788112978922279
 BoxCollider:
@@ -255,6 +254,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4c774eacc8336154eb814ed9086f3df7, type: 3}
       propertyPath: m_Name
       value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4c774eacc8336154eb814ed9086f3df7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
