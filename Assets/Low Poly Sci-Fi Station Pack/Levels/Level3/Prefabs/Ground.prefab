@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 9206021669686886824}
   - component: {fileID: 7983135187041137795}
   - component: {fileID: 8167211191191916310}
+  - component: {fileID: 5661189336188456118}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4490372892834313811
 Transform:
@@ -50,8 +51,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4302275410247994466}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -109,3 +110,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 56.116592, y: 3.6614952, z: 57.50227}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5661189336188456118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302275410247994466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d2cf3c1a65b7945a93a7ccead7a268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

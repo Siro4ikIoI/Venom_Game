@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Key1
+  - Key2
+  - Key3
   - Keys
+  - ToolBOX
   layers:
   - Default
   - TransparentFX

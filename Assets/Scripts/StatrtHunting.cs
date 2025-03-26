@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CountdownTimer : MonoBehaviour
+public class StartHunting : MonoBehaviour
 {
     [Header("Настройки таймера")]
     public float timeRemaining = 60f;
@@ -18,8 +18,11 @@ public class CountdownTimer : MonoBehaviour
     private GameObject venomOpen;
     public bool isCounting = false;
 
+    public static StartHunting Instance { get; set; }
+
     private void Start()
     {
+        Instance = this;
         // Поиск объекта "Laser" внутри "Map_Venom(Clone)"
         GameObject venomObject = GameObject.Find("Map_Venom(Clone)");
         if (venomObject != null)

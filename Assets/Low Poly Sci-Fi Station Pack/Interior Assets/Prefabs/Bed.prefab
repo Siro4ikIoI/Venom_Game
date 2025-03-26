@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4608429120559635059}
   - component: {fileID: 1734055832914833081}
   - component: {fileID: 4595057768497290748}
+  - component: {fileID: -3767019027924309056}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -107,3 +108,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.6181507, y: 1.102309, z: 4.8687696}
   m_Center: {x: -0.0000005364418, y: 0, z: -0.00000035762787}
+--- !u!114 &-3767019027924309056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220789526266285932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d2cf3c1a65b7945a93a7ccead7a268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

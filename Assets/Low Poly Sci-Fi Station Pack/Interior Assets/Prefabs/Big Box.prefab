@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1660286128712313962}
   - component: {fileID: 3525881066172127392}
   - component: {fileID: 3026607655095081267}
+  - component: {fileID: 2983450068210663800}
   m_Layer: 0
   m_Name: Big Box
   m_TagString: Untagged
@@ -107,3 +108,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2239999, y: 1.2239999, z: 1.224}
   m_Center: {x: 0, y: 0, z: -0.000000029802322}
+--- !u!114 &2983450068210663800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165624088707774837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d2cf3c1a65b7945a93a7ccead7a268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

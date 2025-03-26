@@ -2,21 +2,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Diologi : MonoBehaviour
+public class Mesages : MonoBehaviour
 {
-    public string[] textRU;
-    public string[] textEN;
     public float speedtxt = 0.1f;   // Скорость появления символов
     public float delayBetweenLines = 1.5f; // Задержка перед новой строкой
 
     public Text Diologtext;
-    [SerializeField] public GameObject Text;
-    [SerializeField] private GameObject Panl;
+    [SerializeField] public GameObject mesagesPanel;
 
-    private int texnam1 = 0;
+    private int currentIndex = 0; // Текущий индекс строки диалога
     private Coroutine cor;
+    private string[] currentDialog; // Храним текущий диалог
 
-    public static Diologi instance1 { get; private set; }
+    public bool _Dialogs = false;
+
+    public static Mesages instance1 { get; private set; }
 
     private void Awake()
     {
@@ -26,17 +26,20 @@ public class Diologi : MonoBehaviour
     private void Start()
     {
         Diologtext.text = string.Empty;
-        StartDiolog();
     }
 
-    public void StartDiolog()
+    public void StartDiolog(string[] textRU)
     {
         if (cor != null)
             StopCoroutine(cor);
 
-        Text.SetActive(true);
-        Panl.SetActive(true);
+        if (currentDialog != textRU) // Если это новый диалог — начинаем с нуля
+        {
+            currentDialog = textRU;
+            currentIndex = 0;
+        }
 
+        mesagesPanel.SetActive(true);
         cor = StartCoroutine(ShowDialog());
     }
 
@@ -48,17 +51,21 @@ public class Diologi : MonoBehaviour
             cor = null;
         }
 
+        currentIndex = 0; // Сброс индекса при завершении диалога
+        currentDialog = null; // Обнуляем текущий диалог
         Diologtext.text = string.Empty;
-        Text.SetActive(false);
-        Panl.SetActive(false);
+        Diologtext.fontSize = 40;
+        mesagesPanel.SetActive(false);
+        _Dialogs = false;
     }
 
     private IEnumerator ShowDialog()
     {
-        for (int i = texnam1; i < textRU.Length; i++)
+        for (; currentIndex < currentDialog.Length; currentIndex++)
         {
             Diologtext.text = "";
-            yield return StartCoroutine(TipLineRU(textRU[i])); // Вызываем корутину для печати строки
+            Diologtext.fontSize = 40;
+            yield return StartCoroutine(TipLineRU(currentDialog[currentIndex])); // Вызываем корутину для печати строки
             yield return new WaitForSeconds(delayBetweenLines); // Задержка перед следующей фразой
         }
 
@@ -67,9 +74,11 @@ public class Diologi : MonoBehaviour
 
     private IEnumerator TipLineRU(string line)
     {
+        _Dialogs = true;
         foreach (char c in line.ToCharArray())
         {
             Diologtext.text += c;
+            if (Diologtext.text.Length >= 140) Diologtext.fontSize = 30;
             yield return new WaitForSeconds(speedtxt);
         }
     }

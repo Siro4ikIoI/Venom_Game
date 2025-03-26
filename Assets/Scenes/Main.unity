@@ -413,7 +413,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1721450238658705180, guid: f423fa09b4155494e98dd039f14d68f4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -535,6 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0affe8ea293c4cc4e87913cb232e8fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacout: {fileID: 0}
 --- !u!95 &1003740709
 Animator:
   serializedVersion: 5

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7513964660327968804}
   - component: {fileID: 4236610093519405664}
   - component: {fileID: 7673987319535397935}
+  - component: {fileID: 3030811771523112836}
   m_Layer: 0
   m_Name: Card_GateBlue
   m_TagString: Keys
@@ -98,6 +99,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3030811771523112836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593542545141281283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd088a628b46f3f4fb992e37950d7d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cullingDistance: 10
+  children: 1
 --- !u!1 &2209169813723120664
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,12 +10,12 @@ public class Inventory_list : MonoBehaviour
     public static Inventory_list instante { get; set; }
     [Header("Инвентарь")]
     public Transform PL_place_obg;
-    public List<Object_haracter> list_inventory = new List<Object_haracter>();
+    public List<Object_haracter> list_inventory = new List<Object_haracter>(new Object_haracter[3]);
     public List<GameObject> list_Button = new List<GameObject>();
 
 
     private Camera Main_Camera;
-    public int indx_now_obj = 4;
+    public int indx_now_obj = 2;
 
 
     // Создать в редакторе в списке пустой список из null

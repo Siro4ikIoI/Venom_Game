@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class RoomData
@@ -31,6 +33,7 @@ public class LevelGen : MonoBehaviour
     public Vector2Int startPos = Vector2Int.zero;
 
     private Dictionary<Vector2Int, GameObject> placedRooms = new Dictionary<Vector2Int, GameObject>();
+
     private List<Vector2Int> roomPositions = new List<Vector2Int>();
 
     private List<Vector2Int> directions = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
@@ -51,6 +54,7 @@ public class LevelGen : MonoBehaviour
     {
         GenerateLevel();
         GetSpavnKey();
+        //CombineMeshes();
     }
 
     void GenerateLevel()
@@ -118,6 +122,67 @@ public class LevelGen : MonoBehaviour
     }
 
     // --- Вспомогательные функции ---
+
+    void CombineMeshes()
+    {
+        List<CombineInstance> combineInstances = new List<CombineInstance>();
+        Material sharedMaterial = null; // Общий материал для всей сцены
+
+        foreach (var room in placedRooms.Values)
+        {
+            if (room == null) continue;
+
+            MeshFilter[] meshFilters = room.GetComponentsInChildren<MeshFilter>(true);
+            MeshRenderer[] meshRenderers = room.GetComponentsInChildren<MeshRenderer>(true);
+
+            foreach (MeshFilter meshFilter in meshFilters)
+            {
+                if (meshFilter.sharedMesh == null) continue;
+
+                CombineInstance combineInstance = new CombineInstance();
+                combineInstance.mesh = meshFilter.sharedMesh;
+                combineInstance.transform = meshFilter.transform.localToWorldMatrix;
+                combineInstances.Add(combineInstance);
+            }
+
+            if (sharedMaterial == null && meshRenderers.Length > 0)
+            {
+                sharedMaterial = meshRenderers[0].sharedMaterial;
+            }
+        }
+
+        if (combineInstances.Count == 0)
+        {
+            Debug.LogWarning("Нет мешей для объединения!");
+            return;
+        }
+
+        GameObject combinedObject = new GameObject("CombinedMesh");
+        combinedObject.transform.position = Vector3.zero;
+
+        Mesh combinedMesh = new Mesh();
+
+        combinedMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+
+        combinedMesh.CombineMeshes(combineInstances.ToArray(), true, true);
+
+        MeshFilter meshFilterCombined = combinedObject.AddComponent<MeshFilter>();
+        meshFilterCombined.mesh = combinedMesh;
+
+
+        if (sharedMaterial != null)
+        {
+            MeshRenderer renderer = combinedObject.AddComponent<MeshRenderer>();
+            renderer.sharedMaterial = sharedMaterial;
+        }
+        else
+        {
+            Debug.LogWarning("Не найден ни один MeshRenderer с материалом!");
+        }
+
+        Debug.Log($"Объединено {combineInstances.Count} мешей.");
+    }
+
 
     Vector3 GetWorldPosition(Vector2Int pos) => new Vector3(pos.x * gridSize.x, 0, pos.y * gridSize.y);
 
@@ -263,8 +328,8 @@ public class LevelGen : MonoBehaviour
             Vector3 lightPos = new Vector3(roomPositions[i].x * gridSize.x, 12, roomPositions[i].y * gridSize.y);
             Vector3 lightPosCube = new Vector3(roomPositions[i].x * gridSize.x, 13.5f, roomPositions[i].y * gridSize.y);
             if (Random.Range(0, 100) < 35 || lightPos == Vector3.zero) continue;
-            Instantiate(lights, lightPos, Quaternion.identity);
-            Instantiate(lightsCube, lightPosCube, Quaternion.identity);
+            Instantiate(lights, lightPos, Quaternion.identity).transform.SetParent(placedRooms[new Vector2Int(roomPositions[i].x, roomPositions[i].y)].transform);
+            Instantiate(lightsCube, lightPosCube, Quaternion.identity).transform.SetParent(placedRooms[new Vector2Int(roomPositions[i].x, roomPositions[i].y)].transform);
         }
     }
 }

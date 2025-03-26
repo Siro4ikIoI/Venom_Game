@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 1448757346952130591}
   - component: {fileID: -529413624798775890}
   - component: {fileID: -5205937485533688785}
+  - component: {fileID: -7321776484389883976}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -227,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74e0a1c82589c34d96590988dc2357f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savedRotation: {x: 0, y: 0, z: 0, w: 0}
   sprite_obj: {fileID: 21300000, guid: 2d9e0121d7032fa448538be86a48b6ca, type: 3}
 --- !u!54 &-5205937485533688785
 Rigidbody:
@@ -255,6 +257,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7321776484389883976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465476093387802809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd088a628b46f3f4fb992e37950d7d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cullingDistance: 10
+  children: 1
 --- !u!1 &1860461555651696103
 GameObject:
   m_ObjectHideFlags: 0
