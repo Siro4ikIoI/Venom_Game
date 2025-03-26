@@ -29,7 +29,7 @@ public class Enemy_state : MonoBehaviour
             else
             {
                 poteryl += Time.deltaTime;
-                if (poteryl >= 2f)
+                if (poteryl >= 3f)
                 {
                     Search();
                 }

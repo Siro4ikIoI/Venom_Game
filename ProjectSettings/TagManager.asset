@@ -9,11 +9,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - game_item
   - Water
   - UI
   - 
-  - 
+  - Player
   - Post
   - 
   - 
