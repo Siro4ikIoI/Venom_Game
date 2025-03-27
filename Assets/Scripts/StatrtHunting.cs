@@ -18,6 +18,8 @@ public class StartHunting : MonoBehaviour
     private GameObject venomOpen;
     public bool isCounting = false;
 
+    public GameObject[] blackoutDependentTriggers;
+
     public static StartHunting Instance { get; set; }
 
     private void Start()
@@ -104,6 +106,19 @@ public class StartHunting : MonoBehaviour
 
             if (audioMain != null) audioMain.GetComponent<AudioSource>()?.Stop();
             if (audioSiren != null) audioSiren.GetComponent<AudioSource>()?.Play();
+
+            GameObject[] allObjects = FindObjectsOfType<GameObject>(); // Получаем все объекты в сцене
+
+            foreach (GameObject obj in allObjects)
+            {
+                foreach (Transform child in obj.transform) // Проверяем детей первого уровня
+                {
+                    if (child.CompareTag("B_triger")) // Если тег совпадает
+                    {
+                        child.gameObject.SetActive(true); // Активируем объект
+                    }
+                }
+            }
 
             isCounting = false;
         }

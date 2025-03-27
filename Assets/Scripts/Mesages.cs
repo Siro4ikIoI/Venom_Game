@@ -2,21 +2,22 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Mesages : MonoBehaviour
+public class Messages : MonoBehaviour
 {
-    public float speedtxt = 0.1f;   // Скорость появления символов
-    public float delayBetweenLines = 1.5f; // Задержка перед новой строкой
+    public float speedtxt = 0.1f;
+    public Text DialogText;
+    [SerializeField] private GameObject messagesPanel;
 
-    public Text Diologtext;
-    [SerializeField] public GameObject mesagesPanel;
-
-    private int currentIndex = 0; // Текущий индекс строки диалога
+    private int currentIndex = 0;
     private Coroutine cor;
-    private string[] currentDialog; // Храним текущий диалог
+    private string[] currentDialog;
 
     public bool _Dialogs = false;
+    private bool waitingForClick = false; // Флаг ожидания клика
 
-    public static Mesages instance1 { get; private set; }
+    public static Messages instance1 { get; set; }
+
+    private string taskText;
 
     private void Awake()
     {
@@ -25,25 +26,26 @@ public class Mesages : MonoBehaviour
 
     private void Start()
     {
-        Diologtext.text = string.Empty;
+        DialogText.text = string.Empty;
     }
 
-    public void StartDiolog(string[] textRU)
+    public void StartDialog(string[] textRU, string task)
     {
         if (cor != null)
             StopCoroutine(cor);
 
-        if (currentDialog != textRU) // Если это новый диалог — начинаем с нуля
+        if (currentDialog != textRU)
         {
+            taskText = task;
             currentDialog = textRU;
             currentIndex = 0;
         }
 
-        mesagesPanel.SetActive(true);
+        messagesPanel.SetActive(true);
         cor = StartCoroutine(ShowDialog());
     }
 
-    public void StopDiolog()
+    public void StopDialog()
     {
         if (cor != null)
         {
@@ -51,35 +53,55 @@ public class Mesages : MonoBehaviour
             cor = null;
         }
 
-        currentIndex = 0; // Сброс индекса при завершении диалога
-        currentDialog = null; // Обнуляем текущий диалог
-        Diologtext.text = string.Empty;
-        Diologtext.fontSize = 40;
-        mesagesPanel.SetActive(false);
+        currentIndex = 0;
+        currentDialog = null;
+        DialogText.text = string.Empty;
+        DialogText.fontSize = 40;
+        messagesPanel.SetActive(false);
         _Dialogs = false;
+        waitingForClick = false;
     }
 
     private IEnumerator ShowDialog()
     {
         for (; currentIndex < currentDialog.Length; currentIndex++)
         {
-            Diologtext.text = "";
-            Diologtext.fontSize = 40;
-            yield return StartCoroutine(TipLineRU(currentDialog[currentIndex])); // Вызываем корутину для печати строки
-            yield return new WaitForSeconds(delayBetweenLines); // Задержка перед следующей фразой
+            DialogText.text = "";
+            DialogText.fontSize = 40;
+            yield return StartCoroutine(TypeLineRU(currentDialog[currentIndex]));
+
+            // Ждём клика перед показом следующего предложения
+            waitingForClick = true;
+            yield return new WaitUntil(() => IsScreenTouched());
+            waitingForClick = false;
         }
 
-        StopDiolog(); // Отключаем диалог после последней строки
+        Tasks.instante.AddTask(taskText);
+        StopDialog();
     }
 
-    private IEnumerator TipLineRU(string line)
+    private IEnumerator TypeLineRU(string line)
     {
         _Dialogs = true;
         foreach (char c in line.ToCharArray())
         {
-            Diologtext.text += c;
-            if (Diologtext.text.Length >= 140) Diologtext.fontSize = 30;
+            DialogText.text += c;
+            if (DialogText.text.Length >= 140) DialogText.fontSize = 30;
             yield return new WaitForSeconds(speedtxt);
         }
+    }
+
+    private void Update()
+    {
+        // Если ждём клика и игрок нажал кнопку или тапнул по экрану, продолжаем диалог
+        if (waitingForClick && IsScreenTouched())
+        {
+            waitingForClick = false;
+        }
+    }
+
+    private bool IsScreenTouched()
+    {
+        return Input.GetMouseButtonDown(0) || Input.touchCount > 0;
     }
 }

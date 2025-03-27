@@ -32,7 +32,6 @@ public class Lock : MonoBehaviour
                         renderer.materials = materials;
                     }
                 }
-                Inventory_list.instante.Drop_obj();
                 Debug.Log(gameObject.name + " замок активирован!");
                 OnLockActivated?.Invoke();
             }

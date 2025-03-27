@@ -7,15 +7,20 @@ public class TrigerDialogs : MonoBehaviour
 {
     [TextArea(1, 10)]
     public string[] text;
+    [TextArea(1, 10)]
+    public string task;
     public GameObject[] dependentTriggers;
+    public GameObject[] blackoutDependentTriggers;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !Mesages.instance1._Dialogs)
+        Tasks.instante.DelitTask();
+
+        if (other.gameObject.tag == "Player" && !Messages.instance1._Dialogs)
         {
-            Mesages.instance1.StartDiolog(text);
-            
-            if(dependentTriggers != null)
+            Messages.instance1.StartDialog(text, task);
+
+            if (dependentTriggers != null)
             {
                 for (int i = 0; i < dependentTriggers.Length; i++) dependentTriggers[i].SetActive(true);
             }

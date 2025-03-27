@@ -101,7 +101,7 @@ public class Inventory_list : MonoBehaviour
                 object_game.gameObject.SetActive(false);
                 list_inventory[i].transform.SetParent(PL_place_obg);
                 list_inventory[i].transform.position = PL_place_obg.position;
-                list_inventory[i].transform.localRotation = Quaternion.Euler(0, 0, 0);
+                list_inventory[i].transform.localRotation = Quaternion.Euler(0, -90, -90);
                 list_inventory[i].gameObject.layer = LayerMask.NameToLayer("Default");
                 //list_inventory[i].transform.localScale = Vector3.one;
                 Click_obj(list_inventory.IndexOf(object_game));

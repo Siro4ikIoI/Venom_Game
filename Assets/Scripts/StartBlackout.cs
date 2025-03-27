@@ -6,10 +6,15 @@ public class StartBlackout : MonoBehaviour
 {
     [TextArea(1, 10)]
     public string[] text;
+    [TextArea(1, 10)]
+    public string task;
     private Coroutine cor;
+    public GameObject[] dependentTriggers;
 
     private void OnTriggerEnter(Collider other)
     {
+        Tasks.instante.DelitTask();
+
         if (other.gameObject.tag == "Player" && Inventory_list.instante != null &&
     Inventory_list.instante.list_inventory != null &&
     Inventory_list.instante.indx_now_obj >= 0 &&
@@ -19,7 +24,7 @@ public class StartBlackout : MonoBehaviour
         {
             if ((Inventory_list.instante.list_inventory[Inventory_list.instante.indx_now_obj].gameObject.tag == "ToolBOX"))
             {
-                Mesages.instance1.StartDiolog(text);
+                Messages.instance1.StartDialog(text, task);
                 cor = StartCoroutine(StartCountdown());
             }
         }
@@ -31,6 +36,11 @@ public class StartBlackout : MonoBehaviour
         yield return new WaitForSeconds(15f);
         Debug.Log("15 секунд прошло!");
         StartHunting.Instance.isCounting = true;
+
+        if (dependentTriggers != null)
+        {
+            for (int i = 0; i < dependentTriggers.Length; i++) dependentTriggers[i].SetActive(true);
+        }
     }
 
 }
