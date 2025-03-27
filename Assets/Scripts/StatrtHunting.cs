@@ -10,6 +10,7 @@ public class StartHunting : MonoBehaviour
 
     [Header("Игровые объекты")]
     public GameObject[] timerObjects;
+
     public GameObject audioBlackout;
     public GameObject audioBlackoutTheme;
     public GameObject audioMain;

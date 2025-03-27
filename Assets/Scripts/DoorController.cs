@@ -1,0 +1,45 @@
+using UnityEngine;
+
+public class DoorController : MonoBehaviour
+{
+    public Transform door; // Ссылка на объект двери
+    public float openPosition; // Позиция, когда дверь открыта
+    private Vector3 closedPosition; // Позиция, когда дверь закрыта
+    public float speed = 2f; // Скорость движения двери
+    private int playersInside = 0; // Количество игроков в зоне триггеров
+
+    private void Start()
+    {
+        closedPosition = door.position; // Запоминаем начальную позицию двери
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) // Проверяем, что зашёл игрок
+        {
+            playersInside++;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player")) // Проверяем, что вышел игрок
+        {
+            playersInside--;
+        }
+    }
+
+    private void Update()
+    {
+        if (playersInside > 0)
+        {
+            // Двигаем дверь вверх
+            door.position = Vector3.Lerp(door.position, new Vector3(door.position.x, openPosition, door.position.z), Time.deltaTime * speed);
+        }
+        else
+        {
+            // Двигаем дверь вниз
+            door.position = Vector3.Lerp(door.position, new Vector3(door.position.x, 10, door.position.z), Time.deltaTime * speed);
+        }
+    }
+}

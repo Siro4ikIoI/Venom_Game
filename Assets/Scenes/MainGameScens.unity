@@ -3676,6 +3676,7 @@ MonoBehaviour:
     bottomExit: 1
     leftExit: 1
     rightExit: 1
+  door: {fileID: 3181485114578203177, guid: f070b32d1581b3a408b7bbc66ecd6256, type: 3}
   gridSize: {x: 58, y: 58}
   startPos: {x: 0, y: 0}
 --- !u!4 &1485060375

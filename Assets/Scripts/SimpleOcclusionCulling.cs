@@ -18,7 +18,8 @@ public class SimpleOcclusionCulling : MonoBehaviour
         {
             foreach (Transform obj in transform)
             {
-                float distance = Vector3.Distance(mainCamera.transform.position, obj.position);
+                float distance = Vector3.Distance(mainCamera.transform.position, gameObject.transform.position);
+
                 if (distance < cullingDistance)
                 {
                     obj.gameObject.SetActive(true);

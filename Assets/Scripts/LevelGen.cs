@@ -27,6 +27,9 @@ public class LevelGen : MonoBehaviour
     [Header("Тупики (по 1 выходу)")]
     public List<RoomData> deadEndRooms;
 
+    [Header("Двери")]
+    public GameObject door;
+
     [Header("Настройки генерации")]
     private int maxRooms = 20;
     public Vector2Int gridSize = new Vector2Int(55, 55);
@@ -54,7 +57,6 @@ public class LevelGen : MonoBehaviour
     {
         GenerateLevel();
         GetSpavnKey();
-        //CombineMeshes();
     }
 
     void GenerateLevel()
@@ -102,7 +104,7 @@ public class LevelGen : MonoBehaviour
             }
         }
 
-        // --- 4. Поиск финальной комнаты ---
+        // --- 6. Поиск финальной комнаты ---
         Vector2Int endPos = FindFarEndRoomPosition();
         if (endPos != Vector2Int.zero)
         {
@@ -112,77 +114,16 @@ public class LevelGen : MonoBehaviour
             Debug.Log($"Финальная комната на {endPos}");
         }
 
-        // --- 5. Заполняем пустоты тупиками ---
+        // --- 7. Заполняем пустоты тупиками ---
         FillEmptySpacesWithDeadEnds();
 
-        // --- 6. Добовляем освищение ---
+        // --- 8. Добовляем освищение ---
         RoomLightingGenitization();
 
-        Debug.Log($"Итоговое количество комнат: {placedRooms.Count}");
-    }
+
+        Debug.Log($"Итоговое количество комнат: {placedRooms.Count}");    }
 
     // --- Вспомогательные функции ---
-
-    void CombineMeshes()
-    {
-        List<CombineInstance> combineInstances = new List<CombineInstance>();
-        Material sharedMaterial = null; // Общий материал для всей сцены
-
-        foreach (var room in placedRooms.Values)
-        {
-            if (room == null) continue;
-
-            MeshFilter[] meshFilters = room.GetComponentsInChildren<MeshFilter>(true);
-            MeshRenderer[] meshRenderers = room.GetComponentsInChildren<MeshRenderer>(true);
-
-            foreach (MeshFilter meshFilter in meshFilters)
-            {
-                if (meshFilter.sharedMesh == null) continue;
-
-                CombineInstance combineInstance = new CombineInstance();
-                combineInstance.mesh = meshFilter.sharedMesh;
-                combineInstance.transform = meshFilter.transform.localToWorldMatrix;
-                combineInstances.Add(combineInstance);
-            }
-
-            if (sharedMaterial == null && meshRenderers.Length > 0)
-            {
-                sharedMaterial = meshRenderers[0].sharedMaterial;
-            }
-        }
-
-        if (combineInstances.Count == 0)
-        {
-            Debug.LogWarning("Нет мешей для объединения!");
-            return;
-        }
-
-        GameObject combinedObject = new GameObject("CombinedMesh");
-        combinedObject.transform.position = Vector3.zero;
-
-        Mesh combinedMesh = new Mesh();
-
-        combinedMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
-
-        combinedMesh.CombineMeshes(combineInstances.ToArray(), true, true);
-
-        MeshFilter meshFilterCombined = combinedObject.AddComponent<MeshFilter>();
-        meshFilterCombined.mesh = combinedMesh;
-
-
-        if (sharedMaterial != null)
-        {
-            MeshRenderer renderer = combinedObject.AddComponent<MeshRenderer>();
-            renderer.sharedMaterial = sharedMaterial;
-        }
-        else
-        {
-            Debug.LogWarning("Не найден ни один MeshRenderer с материалом!");
-        }
-
-        Debug.Log($"Объединено {combineInstances.Count} мешей.");
-    }
-
 
     Vector3 GetWorldPosition(Vector2Int pos) => new Vector3(pos.x * gridSize.x, 0, pos.y * gridSize.y);
 
@@ -320,6 +261,8 @@ public class LevelGen : MonoBehaviour
 
         Debug.Log(SpavnKeys.Count);
     }
+
+    // --- Свет ---
 
     void RoomLightingGenitization()
     {
