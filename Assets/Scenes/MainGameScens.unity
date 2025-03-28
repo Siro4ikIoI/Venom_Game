@@ -1894,11 +1894,11 @@ RectTransform:
   - {fileID: 831812432}
   - {fileID: 439984960}
   - {fileID: 253849382}
-  - {fileID: 1835823465}
   - {fileID: 1287563440}
   - {fileID: 1837649641}
   - {fileID: 9084624}
   - {fileID: 1109218043}
+  - {fileID: 1835823465}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
