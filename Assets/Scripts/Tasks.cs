@@ -17,11 +17,13 @@ public class Tasks : MonoBehaviour
 
     public void AddTask(string taskText)
     {
+        taskBord.SetActive(true);
         mainTaskText.text = taskText;
     }
 
     public void DelitTask()
     {
+        taskBord.SetActive(false);
         mainTaskText.text = "";
     }
 }

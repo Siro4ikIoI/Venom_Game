@@ -11,14 +11,16 @@ public class TrigerDialogs : MonoBehaviour
     public string task;
     public GameObject[] dependentTriggers;
     public GameObject[] blackoutDependentTriggers;
+    public string tagObj;
 
     private void OnTriggerEnter(Collider other)
     {
+        ArrowPointer.instante.RemoveObj();
         Tasks.instante.DelitTask();
 
         if (other.gameObject.tag == "Player" && !Messages.instance1._Dialogs)
         {
-            Messages.instance1.StartDialog(text, task);
+            Messages.instance1.StartDialog(text, task, tagObj);
 
             if (dependentTriggers != null)
             {

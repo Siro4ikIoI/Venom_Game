@@ -10,6 +10,9 @@ TagManager:
   - Keys
   - ToolBOX
   - B_triger
+  - Door
+  - Eletr
+  - Venom
   layers:
   - Default
   - TransparentFX

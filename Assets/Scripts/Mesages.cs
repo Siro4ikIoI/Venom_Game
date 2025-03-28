@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Messages : MonoBehaviour
@@ -18,6 +19,7 @@ public class Messages : MonoBehaviour
     public static Messages instance1 { get; set; }
 
     private string taskText;
+    private string tagObj = "---";
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class Messages : MonoBehaviour
         DialogText.text = string.Empty;
     }
 
-    public void StartDialog(string[] textRU, string task)
+    public void StartDialog(string[] textRU, string task, string tag)
     {
         if (cor != null)
             StopCoroutine(cor);
@@ -38,6 +40,7 @@ public class Messages : MonoBehaviour
         {
             taskText = task;
             currentDialog = textRU;
+            if (tagObj != null) tagObj = tag;
             currentIndex = 0;
         }
 
@@ -67,7 +70,6 @@ public class Messages : MonoBehaviour
         for (; currentIndex < currentDialog.Length; currentIndex++)
         {
             DialogText.text = "";
-            DialogText.fontSize = 40;
             yield return StartCoroutine(TypeLineRU(currentDialog[currentIndex]));
 
             // ∆дЄм клика перед показом следующего предложени€
@@ -77,6 +79,7 @@ public class Messages : MonoBehaviour
         }
 
         Tasks.instante.AddTask(taskText);
+        if (tagObj != null) ArrowPointer.instante.SetObj(tagObj);
         StopDialog();
     }
 
@@ -86,7 +89,6 @@ public class Messages : MonoBehaviour
         foreach (char c in line.ToCharArray())
         {
             DialogText.text += c;
-            if (DialogText.text.Length >= 140) DialogText.fontSize = 30;
             yield return new WaitForSeconds(speedtxt);
         }
     }

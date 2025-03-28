@@ -108,6 +108,9 @@ public class StartHunting : MonoBehaviour
             if (audioMain != null) audioMain.GetComponent<AudioSource>()?.Stop();
             if (audioSiren != null) audioSiren.GetComponent<AudioSource>()?.Play();
 
+            DoorController.instante._isBlackOut = false;
+            DoorController.instante.BlackOut();
+
             GameObject[] allObjects = FindObjectsOfType<GameObject>(); // Получаем все объекты в сцене
 
             foreach (GameObject obj in allObjects)
