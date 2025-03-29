@@ -42,6 +42,7 @@ public class ArrowPointer : MonoBehaviour
 
     public void SetObj(string tagObj)
     {
+        lineRenderer.enabled = true;
         if (tagObj == "null") target = null;
         else target = GameObject.FindGameObjectWithTag(tagObj).transform;
         Debug.Log(tagObj);
@@ -49,6 +50,7 @@ public class ArrowPointer : MonoBehaviour
 
     public void RemoveObj()
     {
+        lineRenderer.enabled = false;
         target = null;
     }
 }

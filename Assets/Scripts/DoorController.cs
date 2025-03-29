@@ -10,7 +10,7 @@ public class DoorController : MonoBehaviour
 
     public AudioSource doorOpenVolium;
 
-    public bool _isBlackOut = true;
+    private bool _isBlackOut;
 
     public static DoorController instante { get; set; }
 
@@ -40,6 +40,8 @@ public class DoorController : MonoBehaviour
 
     private void Update()
     {
+        _isBlackOut = StartHunting.Instance.isCountingMeneger;
+
         if (_isBlackOut)
         {
             if (playersInside > 0)
@@ -54,12 +56,15 @@ public class DoorController : MonoBehaviour
             }
         }
 
-        else door.position = Vector3.Lerp(door.position, new Vector3(door.position.x, 10, door.position.z), Time.deltaTime * speed);
+        else
+        {
+            door.position = Vector3.Lerp(door.position, new Vector3(door.position.x, openPosition, door.position.z), Time.deltaTime * speed);
+            BlackOut();
+        }
     }
-
     public void BlackOut()
     {
-        doorOpenVolium.Play();
-        door.position = Vector3.Lerp(door.position, new Vector3(door.position.x, openPosition, door.position.z), Time.deltaTime * speed);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        Debug.Log("двери открыты");
     }
 }

@@ -157,8 +157,6 @@ public class Player_forward : MonoBehaviour
 
         if (characterController.velocity.magnitude >= 0.1f)
         {
-            print("555");
-            print(characterController.velocity.magnitude);
             timer += Time.deltaTime * 5;
             Main_Camera.transform.localPosition = new Vector3(standart_camera_x + Mathf.Sin(timer * 1.2f) * 0.25f / 2, standart_camera_y + Mathf.Sin(timer*2.4f) * 0.2f / 2, Main_Camera.transform.localPosition.z);
             //Main_Camera.transform.localRotation = Quaternion.Euler(0, 0, Mathf.Cos(timer * 1.2f) * 1f);

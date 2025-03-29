@@ -189,7 +189,6 @@ MonoBehaviour:
   task: "\u041D\u0430\u0439\u0442\u0438 \u044F\u0449\u0438\u043A \u0441 \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u0430\u043C\u0438 "
   dependentTriggers:
   - {fileID: 3546017031648472316}
-  blackoutDependentTriggers: []
   tagObj: ToolBOX
 --- !u!1 &306723896489921481
 GameObject:
@@ -202,7 +201,7 @@ GameObject:
   - component: {fileID: 6523093830756157818}
   m_Layer: 0
   m_Name: K1
-  m_TagString: Untagged
+  m_TagString: Look
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,6 +221,7 @@ Transform:
   m_Children:
   - {fileID: 4830495677203923973}
   - {fileID: 8946564652696094413}
+  - {fileID: 4732348786379988154}
   m_Father: {fileID: 8194830280914585357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &360622006241585423
@@ -1422,6 +1422,79 @@ Transform:
   - {fileID: 3951582921603644442}
   m_Father: {fileID: 8096929513563856738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2633257721657152545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4732348786379988154}
+  - component: {fileID: 6474713994294525731}
+  - component: {fileID: 7262403988989828477}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: B_triger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4732348786379988154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633257721657152545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -75.25, y: 46.75, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6523093830756157818}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6474713994294525731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633257721657152545}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7262403988989828477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633257721657152545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7714f9087edb75488c4e0698bbd85da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text:
+  - "\u041E\u0442\u043B\u0438\u0447\u043D\u043E \u043F\u0435\u0440\u0432\u044B\u0439
+    \u0435\u0441\u0442\u044C, \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C \u0435\u0449\u0435
+    2"
+  task: 
+  dependentTriggers: []
+  tagObj: null
 --- !u!1 &2680753618697352807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,10 +2224,11 @@ Transform:
   m_GameObject: {fileID: 5043015311383593448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3725, y: 36.7301, z: -74.75}
+  m_LocalPosition: {x: -1.3725, y: 36.7301, z: -74.45}
   m_LocalScale: {x: 3.7171443, y: 3.681012, z: 0.18}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5081906960355059813}
   m_Father: {fileID: 8045576165738206627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8685102746309693271
@@ -2363,6 +2437,73 @@ Transform:
   - {fileID: 5197851404906352156}
   m_Father: {fileID: 6569497766192972834}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &5598417142334269804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5081906960355059813}
+  - component: {fileID: 2106585753525908291}
+  - component: {fileID: 8585347601564774690}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5081906960355059813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598417142334269804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8523071487609964369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2106585753525908291
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598417142334269804}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8585347601564774690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598417142334269804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663640e6e794dd345aae0aa5429a787b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInterface: []
 --- !u!1 &5669558783958016422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2441,7 +2582,6 @@ MonoBehaviour:
   task: "\u041E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u044D\u043B\u0435\u043A\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0439
     \u0449\u0438\u0442\u043E\u043A "
   dependentTriggers: []
-  blackoutDependentTriggers: []
   tagObj: Eletr
 --- !u!1 &5891205707674576117
 GameObject:
@@ -3232,7 +3372,6 @@ MonoBehaviour:
   task: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u043A\u043E\u043C\u043D\u0430\u0442\u0443
     \u0441 \u043C\u043E\u043D\u0441\u0442\u0440\u043E\u043C"
   dependentTriggers: []
-  blackoutDependentTriggers: []
   tagObj: Venom
 --- !u!1 &7141262783890243291
 GameObject:

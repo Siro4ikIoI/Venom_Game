@@ -10,7 +10,6 @@ public class TrigerDialogs : MonoBehaviour
     [TextArea(1, 10)]
     public string task;
     public GameObject[] dependentTriggers;
-    public GameObject[] blackoutDependentTriggers;
     public string tagObj;
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +19,7 @@ public class TrigerDialogs : MonoBehaviour
 
         if (other.gameObject.tag == "Player" && !Messages.instance1._Dialogs)
         {
-            Messages.instance1.StartDialog(text, task, tagObj);
+            Messages.instance1.StartDialog(text, task, tagObj, dependentTriggers);
 
             if (dependentTriggers != null)
             {

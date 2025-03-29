@@ -24,9 +24,9 @@ public class StartBlackout : MonoBehaviour
     Inventory_list.instante.list_inventory[Inventory_list.instante.indx_now_obj] != null &&
     Inventory_list.instante.list_inventory[Inventory_list.instante.indx_now_obj].gameObject != null)
         {
-            if ((Inventory_list.instante.list_inventory[Inventory_list.instante.indx_now_obj].gameObject.tag == "ToolBOX"))
+            if ((Inventory_list.instante.list_inventory[Inventory_list.instante.indx_now_obj].gameObject.tag == "ToolBOX") && !Messages.instance1._Dialogs)
             {
-                Messages.instance1.StartDialog(text, task, tagObj);
+                Messages.instance1.StartDialog(text, task, tagObj, dependentTriggers);
                 cor = StartCoroutine(StartCountdown());
             }
         }
@@ -38,11 +38,6 @@ public class StartBlackout : MonoBehaviour
         yield return new WaitForSeconds(15f);
         Debug.Log("15 секунд прошло!");
         StartHunting.Instance.isCounting = true;
-
-        if (dependentTriggers != null)
-        {
-            for (int i = 0; i < dependentTriggers.Length; i++) dependentTriggers[i].SetActive(true);
-        }
     }
 
 }

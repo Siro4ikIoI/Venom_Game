@@ -20,6 +20,7 @@ public class Messages : MonoBehaviour
 
     private string taskText;
     private string tagObj = "---";
+    private GameObject[] dependentTriggers;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class Messages : MonoBehaviour
         DialogText.text = string.Empty;
     }
 
-    public void StartDialog(string[] textRU, string task, string tag)
+    public void StartDialog(string[] textRU, string task, string tag, GameObject[] triggers)
     {
         if (cor != null)
             StopCoroutine(cor);
@@ -41,6 +42,7 @@ public class Messages : MonoBehaviour
             taskText = task;
             currentDialog = textRU;
             if (tagObj != null) tagObj = tag;
+            dependentTriggers = triggers;
             currentIndex = 0;
         }
 
@@ -78,9 +80,13 @@ public class Messages : MonoBehaviour
             waitingForClick = false;
         }
 
-        Tasks.instante.AddTask(taskText);
+        if (taskText != "") Tasks.instante.AddTask(taskText);
         if (tagObj != null) ArrowPointer.instante.SetObj(tagObj);
         StopDialog();
+        if (dependentTriggers != null)
+        {
+            for (int i = 0; i < dependentTriggers.Length; i++) dependentTriggers[i].SetActive(true);
+        }
     }
 
     private IEnumerator TypeLineRU(string line)
