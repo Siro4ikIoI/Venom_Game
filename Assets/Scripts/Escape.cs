@@ -5,7 +5,8 @@ using UnityEngine;
 public class Escape : MonoBehaviour
 {
     private Animator playerAnim;
-    public GameObject playerInterface;
+    private GameObject playerInterface;
+    public GameObject playerInterfaceEscape;
 
     private void Start()
     {
@@ -21,5 +22,10 @@ public class Escape : MonoBehaviour
             playerInterface.SetActive(true);
             playerAnim.SetBool("escape", true);
         }
+    }
+
+    public void InterfaceActive()
+    {
+        playerInterfaceEscape.SetActive(true);
     }
 }

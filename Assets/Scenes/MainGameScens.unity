@@ -1747,6 +1747,7 @@ GameObject:
   - component: {fileID: 430526094}
   - component: {fileID: 430526097}
   - component: {fileID: 430526098}
+  - component: {fileID: 430526099}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvos
@@ -1769,12 +1770,12 @@ RectTransform:
   - {fileID: 238205347}
   - {fileID: 831812432}
   - {fileID: 439984960}
-  - {fileID: 253849382}
-  - {fileID: 1287563440}
-  - {fileID: 1837649641}
   - {fileID: 9084624}
+  - {fileID: 1837649641}
   - {fileID: 1109218043}
+  - {fileID: 253849382}
   - {fileID: 1835823465}
+  - {fileID: 1287563440}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1879,6 +1880,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blacout: {fileID: 1835823464}
+--- !u!114 &430526099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430526092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663640e6e794dd345aae0aa5429a787b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInterfaceEscape: {fileID: 1287563439}
 --- !u!1 &439984959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2287,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 619670612}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 430526098}
+        m_TargetAssemblyTypeName: ScenControl, Assembly-CSharp
+        m_MethodName: SetScen
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &619670612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2393,7 +2419,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 632625480}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 430526098}
+        m_TargetAssemblyTypeName: ScenControl, Assembly-CSharp
+        m_MethodName: SetScen
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &632625480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3022,7 +3060,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: " \u0412\u0430\u0441 \u0441\u0445\u0432\u0430\u0442\u0438\u043B \nVENOM"
+  m_Text: "\u0412\u044B \u0441\u0431\u0435\u0436\u0430\u043B\u0438"
 --- !u!222 &1275988317
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3041,8 +3079,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1287563440}
   m_Layer: 5
-  m_Name: Death
-  m_TagString: Untagged
+  m_Name: Escape
+  m_TagString: BlOu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3054,7 +3092,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287563439}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

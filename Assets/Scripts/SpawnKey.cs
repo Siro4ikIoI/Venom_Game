@@ -25,6 +25,7 @@ public class SpawnKey : MonoBehaviour
         {
             Vector3 pos = GetUniquePosition();
             usedPositions.Add(pos);
+            LevelGen.SpavnKeys.Clear();
 
             GameObject GameOBJ = Instantiate(gameOBJ[i], pos, gameOBJ[i].transform.rotation);
         }
