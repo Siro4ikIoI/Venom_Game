@@ -2346,6 +2346,7 @@ GameObject:
   - component: {fileID: 430526097}
   - component: {fileID: 430526098}
   - component: {fileID: 430526099}
+  - component: {fileID: 430526100}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvos
@@ -2369,11 +2370,11 @@ RectTransform:
   - {fileID: 831812432}
   - {fileID: 154931698}
   - {fileID: 253849382}
-  - {fileID: 1287563440}
   - {fileID: 1837649641}
   - {fileID: 9084624}
   - {fileID: 1109218043}
   - {fileID: 1835823465}
+  - {fileID: 1287563440}
   - {fileID: 2114461863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2492,6 +2493,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInterfaceEscape: {fileID: 2114461862}
+--- !u!114 &430526100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430526092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8568a02d676ab864fb06e454961ac215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detahIntrfase: {fileID: 1287563439}
 --- !u!1 &532151901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,7 +3001,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 619670612}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 430526098}
+        m_TargetAssemblyTypeName: ScenControl, Assembly-CSharp
+        m_MethodName: SetScen
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &619670612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3107,7 +3133,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 632625480}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 430526098}
+        m_TargetAssemblyTypeName: ScenControl, Assembly-CSharp
+        m_MethodName: SetScen
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &632625480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6044,6 +6082,8 @@ MonoBehaviour:
   Triger_atack_clip: {fileID: 8300000, guid: 731fa68f6c9e102459f6a2ce1c5f7a1e, type: 3}
   Enemy_audio: {fileID: 8300000, guid: dfc9d2cc8b4c5b8469fdf124eb868af8, type: 3}
   trr: 0
+  playerAnim: {fileID: 430526097}
+  deathInterface: {fileID: 1835823464}
 --- !u!136 &2073479086
 CapsuleCollider:
   m_ObjectHideFlags: 0

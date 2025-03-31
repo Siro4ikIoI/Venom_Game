@@ -26,6 +26,10 @@ public class Enemy_state : MonoBehaviour
     private bool tr_search = true;
     public bool trr;
     private NavMeshPath path;
+
+    public Animator playerAnim;
+    public GameObject deathInterface;
+
     private void Start()
     {
         tr_search = true;
@@ -79,6 +83,8 @@ public class Enemy_state : MonoBehaviour
             AudioSource_osn.PlayOneShot(Triger_atack_clip);
             AudioSource_step.Pause();
             animator_enemy.SetTrigger("Atack_en");
+            deathInterface.SetActive(true);
+            playerAnim.SetBool("death", true);
         }
         else
         agent.SetDestination(Player_pos.transform.position);
