@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   no_fizik: 1
   audioClip: {fileID: 8300000, guid: c1a9a248b42ecd742ac6ae0ece88c08d, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1339214957}
 --- !u!65 &284020504
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   no_fizik: 0
   audioClip: {fileID: 8300000, guid: f26a90e71700fe541990d9934a312295, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1339214957}
 --- !u!54 &381517727
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2075,7 +2075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   no_fizik: 0
   audioClip: {fileID: 8300000, guid: f26a90e71700fe541990d9934a312295, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1339214957}
 --- !u!54 &401487211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4465,15 +4465,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1c9c9220af1f3c845bac9690ce126a1a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 120
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1c9c9220af1f3c845bac9690ce126a1a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 120
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1c9c9220af1f3c845bac9690ce126a1a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 120
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1c9c9220af1f3c845bac9690ce126a1a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5232,7 +5232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   no_fizik: 1
   audioClip: {fileID: 8300000, guid: 54554fbb63177264a968bfc9878b3b63, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1339214957}
 --- !u!65 &1876133277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5700,6 +5700,7 @@ MonoBehaviour:
   AudioSource_osn: {fileID: 87430855}
   Triger_atack_clip: {fileID: 8300000, guid: 731fa68f6c9e102459f6a2ce1c5f7a1e, type: 3}
   Enemy_audio: {fileID: 8300000, guid: dfc9d2cc8b4c5b8469fdf124eb868af8, type: 3}
+  trr: 0
 --- !u!136 &2073479086
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5782,7 +5783,7 @@ Transform:
   m_GameObject: {fileID: 2073479083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.94, y: 0.10000014, z: -104.93}
+  m_LocalPosition: {x: -6.7, y: 0.10000014, z: -168.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
