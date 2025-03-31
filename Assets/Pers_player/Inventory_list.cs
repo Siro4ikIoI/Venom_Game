@@ -45,7 +45,7 @@ public class Inventory_list : MonoBehaviour
             Drop_obj();
         }
 
-        if (Input.mouseScrollDelta.y > 0) {
+        if (Input.mouseScrollDelta.y < 0) {
             for (int i = indx_now_obj + 1; i < list_inventory.Count; i++)
             {
                 if (list_inventory[i] != null)
@@ -63,7 +63,7 @@ public class Inventory_list : MonoBehaviour
                 }
             }
         }
-        else if (Input.mouseScrollDelta.y < 0) {
+        else if (Input.mouseScrollDelta.y > 0) {
 
             for (int i = indx_now_obj - 1; i > -list_inventory.Count; i--)
             {

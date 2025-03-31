@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class StartHunting : MonoBehaviour
@@ -24,8 +26,15 @@ public class StartHunting : MonoBehaviour
 
     public static StartHunting Instance { get; set; }
 
+    public NavMeshSurface surface;
+    public GameObject Player_pos;
+    public GameObject Venom_pos;
+    public GameObject screamer_m;
+
     private void Start()
     {
+        surface.UpdateNavMesh(surface.navMeshData);
+        //StartCoroutine(UpdateNavMeshs());//кор
         Instance = this;
         // Поиск объекта "Laser" внутри "Map_Venom(Clone)"
         GameObject venomObject = GameObject.Find("Map_Venom(Clone)");
@@ -44,6 +53,19 @@ public class StartHunting : MonoBehaviour
         TryStartCountdown();
     }
 
+    //private IEnumerator UpdateNavMeshs()
+    //{
+    //    yield return new WaitForSeconds(4f);
+    //    AsyncOperation asyncOp = surface.UpdateNavMesh(surface.navMeshData);
+    //
+    //    while (!asyncOp.isDone)
+    //    {
+    //        Debug.Log($"Прогресс генерации NavMesh: {asyncOp.progress * 100}%");
+    //        yield return null; // Ожидаем завершения без зависания
+    //    }
+    //
+    //    Debug.Log("NavMesh построен!");
+    //}
     private IEnumerator StartCountdown()
     {
         isCounting = true;
@@ -69,6 +91,10 @@ public class StartHunting : MonoBehaviour
     private void TimerEnded()
     {
         Debug.Log("Таймер истек! Происходит событие...");
+        Venom_pos.SetActive(true);
+        //Venom_pos.transform.position = Player_pos.transform.TransformPoint(Player_pos.transform.localPosition.x, Player_pos.transform.localPosition.y, Player_pos.transform.localPosition.z + 4.5f);
+        screamer_m.SetActive(true);
+
 
         if (venomOpen != null)
         {

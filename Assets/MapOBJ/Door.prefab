@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2218736897056680273}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1677799175057695030}
   - component: {fileID: 974998718426747751}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Doorobj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3295989698750577409}
   - component: {fileID: 853604963121138201}
   - component: {fileID: 5357350312971734366}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 7057354123216985012}
   - component: {fileID: 7018279392048080295}
   - component: {fileID: 2426162362089515572}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 356514870974442056}
   - component: {fileID: 8837168025915377890}
   - component: {fileID: 1068082306976651828}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Trig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,6 +445,7 @@ MonoBehaviour:
   openPosition: 0
   speed: 2
   doorOpenVolium: {fileID: 974998718426747751}
+  _isBlackOut: 1
 --- !u!1001 &1907407170175548150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -476,6 +477,10 @@ PrefabInstance:
     - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -570,6 +575,10 @@ PrefabInstance:
     - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
+      propertyPath: m_Layer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
       propertyPath: m_StaticEditorFlags

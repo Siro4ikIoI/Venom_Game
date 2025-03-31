@@ -2968,7 +2968,7 @@ GameObject:
   - component: {fileID: 8783007823046651861}
   - component: {fileID: 5203637558989865846}
   - component: {fileID: 6225695618828718768}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5343,6 +5343,10 @@ PrefabInstance:
     - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3246877013297955022, guid: 8338c8a7ad6ab544995d834f1c4c7014, type: 3}
       propertyPath: m_StaticEditorFlags
