@@ -52,19 +52,19 @@ public class StartHunting : MonoBehaviour
         TryStartCountdown();
     }
 
-    private IEnumerator UpdateNavMeshs()
-    {
-        yield return new WaitForSeconds(4f);
-        AsyncOperation asyncOp = surface.UpdateNavMesh(surface.navMeshData);
-
-        while (!asyncOp.isDone)
-        {
-            Debug.Log($"Прогресс генерации NavMesh: {asyncOp.progress * 100}%");
-            yield return null; // Ожидаем завершения без зависания
-        }
-
-        Debug.Log("NavMesh построен!");
-    }
+    //private IEnumerator UpdateNavMeshs()
+    //{
+    //    yield return new WaitForSeconds(4f);
+    //    AsyncOperation asyncOp = surface.UpdateNavMesh(surface.navMeshData);
+    //
+    //    while (!asyncOp.isDone)
+    //    {
+    //        Debug.Log($"Прогресс генерации NavMesh: {asyncOp.progress * 100}%");
+    //        yield return null; // Ожидаем завершения без зависания
+    //    }
+    //
+    //    Debug.Log("NavMesh построен!");
+    //}
     private IEnumerator StartCountdown()
     {
         isCounting = true;
@@ -91,7 +91,7 @@ public class StartHunting : MonoBehaviour
     {
         Debug.Log("Таймер истек! Происходит событие...");
         Venom_pos.SetActive(true);
-        Venom_pos.transform.position = Player_pos.transform.TransformPoint(Player_pos.transform.localPosition.x, Player_pos.transform.localPosition.y, Player_pos.transform.localPosition.z + 4.5f);
+        //Venom_pos.transform.position = Player_pos.transform.TransformPoint(Player_pos.transform.localPosition.x, Player_pos.transform.localPosition.y, Player_pos.transform.localPosition.z + 4.5f);
         screamer_m.SetActive(true);
 
 
