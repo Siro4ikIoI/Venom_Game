@@ -40,6 +40,17 @@ public class Player_forward : MonoBehaviour
         standart_pl_y_half = characterController.height / 2;
         stamina_sl.maxValue = max_stamina;
         //rigidbody_pl = GetComponent<Rigidbody>();
+
+        if (!mobil)
+        {
+            TohScreen.gameObject.SetActive(false);
+            Joystick_p.gameObject.SetActive(false);
+        }
+        else
+        {
+            TohScreen.gameObject.SetActive(true);
+            Joystick_p.gameObject.SetActive(true);
+        }
     }
 
     public void Sit_down(bool ch)
@@ -89,6 +100,7 @@ public class Player_forward : MonoBehaviour
                             mouseY += touch.deltaPosition.y * Time.deltaTime * TohScreen.fingerSpeed;
                             xhR += mouseX;
                             yhR += mouseY;
+                            yhR = Mathf.Clamp(yhR, -90, 87);
                             Main_Camera.transform.localRotation = Quaternion.Euler(-yhR, xhR, 0);
                         }
                         if (touch.phase == TouchPhase.Stationary)
@@ -105,6 +117,7 @@ public class Player_forward : MonoBehaviour
             hor_input = Joystick_p.Horizontal;
             ver_input = Joystick_p.Vertical;
             Vector3 moveVektor = (new Vector3(Main_Camera.transform.forward.x, 0f, Main_Camera.transform.forward.z) * ver_input + Main_Camera.transform.right * hor_input) * Time.deltaTime * Speed_Player;
+            characterController.Move(transform.TransformVector(moveVektor));
             //transform.Translate(moveVektor, Space.World);
             //rigidbody_pl.AddForce(moveVektor);
         }

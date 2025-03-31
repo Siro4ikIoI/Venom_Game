@@ -31,7 +31,7 @@ public class LevelGen : MonoBehaviour
     public GameObject door;
 
     [Header("Настройки генерации")]
-    private int maxRooms = 20;
+    private int maxRooms = 18;
     public Vector2Int gridSize = new Vector2Int(55, 55);
     public Vector2Int startPos = Vector2Int.zero;
 
