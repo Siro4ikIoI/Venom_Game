@@ -33,8 +33,8 @@ public class Player_forward : MonoBehaviour
     {
         standart_speed = Speed_Player;
         Main_Camera = Camera.main;
-        standart_camera_y = Main_Camera.transform.position.y;
-        standart_camera_x = Main_Camera.transform.position.x;
+        standart_camera_y = Main_Camera.transform.localPosition.y;
+        standart_camera_x = Main_Camera.transform.localPosition.x;
         characterController = GetComponent<CharacterController>();
         standart_pl_y = characterController.height;
         standart_pl_y_half = characterController.height / 2;

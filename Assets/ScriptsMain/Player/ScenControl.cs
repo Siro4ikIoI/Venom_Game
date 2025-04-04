@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,21 @@ public class ScenControl : MonoBehaviour
     public void SetScen(int scenIndex)
     {
         SceneManager.LoadScene(scenIndex);
+    }
+
+    //лучше
+    private IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
+
+        // Ждем, пока сцена загрузится на 90%
+        while (asyncLoad.progress < 0.9f)
+        {
+            Debug.Log($"Загрузка: {asyncLoad.progress * 100}%");
+            yield return null;
+        }
+
     }
 
     public void StartAnim()

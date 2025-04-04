@@ -136,4 +136,6 @@ public class Enemy_state : MonoBehaviour
     {
         AudioSource_step.PlayOneShot(Enemy_audio);
     }
+
+
 }
