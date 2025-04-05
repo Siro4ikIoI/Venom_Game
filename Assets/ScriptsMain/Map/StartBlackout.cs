@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class StartBlackout : MonoBehaviour
 {
     [TextArea(1, 10)]
     public string[] text;
     [TextArea(1, 10)]
+    public string[] textEn;
+    [TextArea(1, 10)]
+    public string[] textTr;
+
+    [TextArea(1, 10)]
     public string task;
+    [TextArea(1, 10)]
+    public string taskEn;
+    [TextArea(1, 10)]
+    public string taskTr;
+
     private Coroutine cor;
     public GameObject[] dependentTriggers;
     public string tagObj;
@@ -26,7 +37,10 @@ public class StartBlackout : MonoBehaviour
         {
             if ((Inventory_list.instante.list_inventory[Inventory_list.instante.indx_now_obj].gameObject.tag == "ToolBOX") && !Messages.instance1._Dialogs)
             {
-                Messages.instance1.StartDialog(text, task, tagObj, dependentTriggers);
+                if (YandexGame.lang == "ru") Messages.instance1.StartDialog(text, task, tagObj, dependentTriggers);
+                else if (YandexGame.lang == "tr") Messages.instance1.StartDialog(textTr, taskTr, tagObj, dependentTriggers);
+                else Messages.instance1.StartDialog(textEn, taskEn, tagObj, dependentTriggers);
+
                 cor = StartCoroutine(StartCountdown());
             }
         }

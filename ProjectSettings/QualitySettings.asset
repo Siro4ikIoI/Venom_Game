@@ -12,7 +12,7 @@ QualitySettings:
     shadows: 0
     shadowResolution: 0
     shadowProjection: 0
-    shadowCascades: 4
+    shadowCascades: 1
     shadowDistance: 0
     shadowNearPlaneOffset: 0
     shadowCascade2Split: 0.33333334
@@ -23,7 +23,7 @@ QualitySettings:
     textureMipmapLimitSettings: []
     anisotropicTextures: 0
     antiAliasing: 0
-    softParticles: 1
+    softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 0
@@ -32,7 +32,7 @@ QualitySettings:
     realtimeGICPUUsage: 100
     lodBias: 0.01
     maximumLODLevel: 0
-    enableLODCrossFade: 1
+    enableLODCrossFade: 0
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
@@ -42,18 +42,18 @@ QualitySettings:
     particleRaycastBudget: 0
     asyncUploadTimeSlice: 1
     asyncUploadBufferSize: 2
-    asyncUploadPersistentBuffer: 1
-    resolutionScalingFixedDPIFactor: 1
+    asyncUploadPersistentBuffer: 0
+    resolutionScalingFixedDPIFactor: 0
     customRenderPipeline: {fileID: 0}
-    terrainQualityOverrides: 0
+    terrainQualityOverrides: 255
     terrainPixelError: 1
-    terrainDetailDensityScale: 1
-    terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
-    terrainTreeDistance: 5000
-    terrainBillboardStart: 50
-    terrainFadeLength: 5
-    terrainMaxTrees: 50
+    terrainDetailDensityScale: 0
+    terrainBasemapDistance: 0
+    terrainDetailDistance: 0
+    terrainTreeDistance: 0
+    terrainBillboardStart: 5
+    terrainFadeLength: 0
+    terrainMaxTrees: 0
     excludedTargetPlatforms: []
   - serializedVersion: 3
     name: Castom
