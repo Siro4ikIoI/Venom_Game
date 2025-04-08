@@ -62,6 +62,7 @@ public class Player_forward : MonoBehaviour
         {
             TohScreen.gameObject.SetActive(true);
             Joystick_p.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
