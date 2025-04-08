@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class Player_forward : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class Player_forward : MonoBehaviour
     private bool isCrouching = false;
     private float standart_pl_y;
     private float standart_pl_y_half;
-    private float standart_speed;
+    [HideInInspector]public float standart_speed;
     private float standart_camera_y;
     private float standart_camera_x;
     void Start()
@@ -41,6 +42,17 @@ public class Player_forward : MonoBehaviour
         stamina_sl.maxValue = max_stamina;
         //rigidbody_pl = GetComponent<Rigidbody>();
 
+        Cursor.lockState = CursorLockMode.Locked;
+        if (YandexGame.EnvironmentData.deviceType == "desktop")
+        {
+            mobil = false;
+            //QualitySettings.SetQualityLevel();
+        }
+        else
+        {
+            mobil = true;
+            QualitySettings.SetQualityLevel(0);
+        }
         if (!mobil)
         {
             TohScreen.gameObject.SetActive(false);

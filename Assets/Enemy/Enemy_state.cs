@@ -78,13 +78,14 @@ public class Enemy_state : MonoBehaviour
     {
         if(h.distance < 1 && h.transform.tag == "Player")
         {
-            Player_pos.GetComponent<Player_forward>().Speed_Player = 0;
+            Player_pos.GetComponent<Player_forward>().standart_speed = 0;
             Player_camera_pos.transform.LookAt(gameObject.transform.position + new Vector3(0,3,0));
             AudioSource_osn.PlayOneShot(Triger_atack_clip);
             AudioSource_step.Pause();
             animator_enemy.SetTrigger("Atack_en");
             deathInterface.SetActive(true);
             playerAnim.SetBool("death", true);
+            UnityEngine.Cursor.lockState = CursorLockMode.None; // дата-visibl
         }
         else
         agent.SetDestination(Player_pos.transform.position);
