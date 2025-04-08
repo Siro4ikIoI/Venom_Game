@@ -49,7 +49,7 @@ public class StartBlackout : MonoBehaviour
     private IEnumerator StartCountdown()
     {
         Debug.Log("Таймер запущен!");
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(8f);
         Debug.Log("15 секунд прошло!");
         StartHunting.Instance.isCounting = true;
     }
