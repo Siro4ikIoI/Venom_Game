@@ -11,7 +11,7 @@ public class Unfocused_game : MonoBehaviour
         {
             foreach (GameObject audio in osn_audio)
             {
-                audio.SetActive(false);
+                if (audio != null) audio.GetComponent<AudioSource>().Stop();
                 Time.timeScale = 0;
             }
         }
@@ -19,7 +19,7 @@ public class Unfocused_game : MonoBehaviour
         {
             foreach (GameObject audio in osn_audio)
             {
-                audio.SetActive(true);
+                if (audio != null) audio.GetComponent<AudioSource>().Play();
                 Time.timeScale = 1;
             }
         }

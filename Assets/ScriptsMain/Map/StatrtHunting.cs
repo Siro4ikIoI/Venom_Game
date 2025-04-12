@@ -111,9 +111,13 @@ public class StartHunting : MonoBehaviour
 
     private void PlayBlackoutEffects()
     {
+        if (audioBlackout != null) audioBlackout.SetActive(true);
         if (audioBlackout != null) audioBlackout.GetComponent<AudioSource>()?.Play();
+
+        if (audioBlackoutTheme != null) audioBlackoutTheme.SetActive(true);
         if (audioBlackoutTheme != null) audioBlackoutTheme.GetComponent<AudioSource>()?.Play();
-        if (audioSiren != null) audioSiren.GetComponent<AudioSource>()?.Stop();
+
+        if (audioSiren != null) audioSiren.SetActive(false);
 
         RenderSettings.fog = true;
         RenderSettings.fogColor = Color.black;
@@ -134,7 +138,8 @@ public class StartHunting : MonoBehaviour
             timerObjects[0].SetActive(true);
             StartCoroutine(StartCountdown());
 
-            if (audioMain != null) audioMain.GetComponent<AudioSource>()?.Stop();
+            if (audioMain != null) audioMain.SetActive(false);
+            if (audioSiren != null) audioSiren.SetActive(true);
             if (audioSiren != null) audioSiren.GetComponent<AudioSource>()?.Play();
 
             GameObject[] allObjects = FindObjectsOfType<GameObject>(); // Получаем все объекты в сцене
