@@ -30,6 +30,7 @@ public class Player_forward : MonoBehaviour
     [HideInInspector]public float standart_speed;
     private float standart_camera_y;
     private float standart_camera_x;
+
     void Start()
     {
         standart_speed = Speed_Player;
@@ -40,6 +41,7 @@ public class Player_forward : MonoBehaviour
         standart_pl_y = characterController.height;
         standart_pl_y_half = characterController.height / 2;
         stamina_sl.maxValue = max_stamina;
+        stamina_sl.value = max_stamina;
         //rigidbody_pl = GetComponent<Rigidbody>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -62,6 +64,7 @@ public class Player_forward : MonoBehaviour
         {
             TohScreen.gameObject.SetActive(true);
             Joystick_p.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -80,9 +83,11 @@ public class Player_forward : MonoBehaviour
     {
         isCrouching = !isCrouching;
         if (isCrouching)
-            transform.localScale = new Vector3(transform.localScale.x, standart_pl_y, transform.localScale.z);
+            characterController.height = standart_pl_y;
+        //transform.localScale = new Vector3(transform.localScale.x, standart_pl_y, transform.localScale.z);
         else
-            transform.localScale = new Vector3(transform.localScale.x, standart_pl_y_half, transform.localScale.z);
+            characterController.height = standart_pl_y_half;
+        //transform.localScale = new Vector3(transform.localScale.x, standart_pl_y_half, transform.localScale.z);
     }
 
     public void Run_Vasy_run()
@@ -90,6 +95,12 @@ public class Player_forward : MonoBehaviour
         Speed_Player = standart_speed * 2;
         max_stamina -= Time.deltaTime;
         stamina_sl.value = max_stamina;
+
+    }
+
+    public bool Run_mobil_tr()
+    {
+        return true;
     }
 
     void Update()
@@ -158,20 +169,40 @@ public class Player_forward : MonoBehaviour
                 Sit_down(true);
             }
 
-            if (Input.GetKey(KeyCode.LeftShift) && max_stamina > 1)
+            if (mobil)
             {
-                Run_Vasy_run();
+                if (Run_mobil_tr())
+                {
+                    Run_Vasy_run();
+                }
+                else
+                {
+                    Speed_Player = standart_speed;
+                    if (stamina_sl.maxValue >= max_stamina)
+                    {
+                        max_stamina += Time.deltaTime * 0.5f;
+                        stamina_sl.value = max_stamina;
+                    }
+                }
             }
             else
             {
-                Speed_Player = standart_speed;
-                if (stamina_sl.maxValue >= max_stamina)
+                if (Input.GetKey(KeyCode.LeftShift) && max_stamina > 1)
                 {
-                    max_stamina += Time.deltaTime * 0.5f;
-                    stamina_sl.value = max_stamina;
+                    Run_Vasy_run();
                 }
+                else
+                {
+                    Speed_Player = standart_speed;
+                    if (stamina_sl.maxValue >= max_stamina)
+                    {
+                        max_stamina += Time.deltaTime * 0.5f;
+                        stamina_sl.value = max_stamina;
+                    }
 
+                }
             }
+
         }
 
         //if (!characterController.isGrounded) {
