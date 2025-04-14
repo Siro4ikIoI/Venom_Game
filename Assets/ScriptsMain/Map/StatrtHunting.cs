@@ -51,6 +51,8 @@ public class StartHunting : MonoBehaviour
     private void Update()
     {
         TryStartCountdown();
+
+        if (audioBlackout != null && audioBlackout.GetComponent<AudioSource>()?.isPlaying == !true) audioBlackout.SetActive(false);
     }
 
     //private IEnumerator UpdateNavMeshs()
