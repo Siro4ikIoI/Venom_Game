@@ -109,7 +109,6 @@ QualitySettings:
     - iPhone
     - Windows Store Apps
     - Standalone
-    - WebGL
   - serializedVersion: 3
     name: Very Low
     pixelLightCount: 0
