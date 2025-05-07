@@ -121,8 +121,8 @@ public class Player_forward : MonoBehaviour
                         {
                             mouseX += touch.deltaPosition.x * Time.deltaTime * TohScreen.fingerSpeed;
                             mouseY += touch.deltaPosition.y * Time.deltaTime * TohScreen.fingerSpeed;
-                            xhR += mouseX;
-                            yhR += mouseY;
+                            xhR -= mouseX;
+                            yhR -= mouseY;
                             yhR = Mathf.Clamp(yhR, -90, 87);
                             Main_Camera.transform.localRotation = Quaternion.Euler(-yhR, xhR, 0);
                         }
